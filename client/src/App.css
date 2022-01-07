@@ -1,0 +1,24 @@
+
+body{
+  background-color: #B6ACAC;
+  font-family: 'Roboto', sans-serif;
+}
+
+.App{
+  margin: 15px 0 25px 25px;
+}
+
+.app-title{
+
+  font-weight: 500;
+  padding: 0;
+  margin: 0;
+}
+
+.sub-title{
+  font-weight: 400;
+}
+
+.main-form{
+  margin-top: 40px;
+}
