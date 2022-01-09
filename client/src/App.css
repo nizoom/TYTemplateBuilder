@@ -21,4 +21,55 @@ body{
 
 .main-form{
   margin-top: 40px;
+ 
+}
+
+.form-wrapper{
+  display: grid;
+  grid-gap: 1fr;
+  grid-template-columns: 150px 150px 150px 150px;
+  grid-template-rows: auto;
+  justify-content: start;
+  margin: 0;
+}
+
+.field-name{
+  font-size: large;
+  grid-column: span 1;
+  grid-row: row ;
+  align-self: start;
+  
+}
+/* 
+.field-section{
+
+} */
+
+.long-dropdown-position{
+  grid-column:  span 3 ;
+  grid-row: row;
+  align-self: end;
+ 
+}
+
+.dropdown-options{
+  grid-column:  span 3 ;
+  grid-row: row;
+  align-self: start;
+}
+
+.template-field-name{
+  
+  font-size: large;
+  grid-column: span 1;
+  grid-row: row ;
+  
+  align-self: start;
+}
+
+.donor-field-name{
+  margin-top: 20px;
+  font-size: large;
+  grid-column: span 1;
+  grid-row: row 2;
 }

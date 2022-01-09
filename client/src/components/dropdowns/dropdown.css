@@ -1,0 +1,42 @@
+/* dont touch positioning here */
+
+.long-dropdown{
+   
+}
+
+.dropdown-wrapper{
+    font-family: 'Roboto', sans-serif;
+ 
+   
+}
+
+.dropdown-wrapper button{
+    background-color: white;
+    border: none;
+    height: 30px;
+    width: 300px;
+    color: #545B5C;
+}
+
+.dropdown-options{
+    cursor: pointer;
+    margin-top: 0;
+    width: 300px;
+    list-style-type: none;
+    margin-left: 0;
+    padding-left: 0;
+    text-align: center;
+}
+
+.dropdown-options li{
+    
+    padding: 6px;
+    font-weight: 400;
+    font-size: small;
+    color: #011012;
+    background-color: gray;
+    border: 2px solid white;
+    border-top: none;
+}
+
+

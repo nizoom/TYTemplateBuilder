@@ -1,7 +1,12 @@
 import './App.css';
 import Dropdown from './components/dropdowns/dropdowns';
 
+import React, {useState} from 'react'
+
 function App() {
+
+ 
+
   return (
 
     <div className="App">
@@ -13,8 +18,15 @@ function App() {
       <form className = 'main-form'>
         <div className = 'form-wrapper'>
 
-          <p className = 'field-name'> Template Type: </p>
-          {/* LABELS AND FIELDS */}
+
+              <label className = 'template-field-name'> Template Type: </label>
+
+              <Dropdown  prefill = 'Choose template type' cssClass = 'long-dropdown' 
+              options = {['New donor', 'Recurring donor', 'Honoree']} /> 
+
+              <label className='donor-field-name'> Donor Name: </label>
+
+       
 
         </div>
       </form>
