@@ -12,13 +12,11 @@ const Dropdown = ( props ) => {
         
     }
 
-    const userSelection = (option) => {
-        console.log(option)
-    }
+
 
     const renderList = props.options.map((option, index) => {
 
-        return <li key = {index} onClick = {() => userSelection(option)}>{option}</li>
+        return <li key = {index} onClick = {() => props.getTemplateDecision(option)}>{option}</li>
 
     })
 
