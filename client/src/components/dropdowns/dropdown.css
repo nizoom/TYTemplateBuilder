@@ -11,11 +11,12 @@
 }
 
 .dropdown-wrapper button{
-    background-color: white;
+    background-color: #04010F;
     border: none;
     height: 30px;
     width: 300px;
-    color: #545B5C;
+    color: #71A9B2;
+    border-bottom: 2px solid rgb(199, 205, 224);
 }
 
 .dropdown-options{
@@ -30,13 +31,20 @@
 
 .dropdown-options li{
     
-    padding: 6px;
+    padding: 7px;
     font-weight: 400;
     font-size: small;
-    color: #011012;
-    background-color: gray;
-    border: 2px solid white;
+    color: #71A9B2;
+    background-color:  #0a0225;
+
+    border: 2px solid rgb(199, 205, 224);
+    border-right: none;
+    border-left:none;
     border-top: none;
 }
+
+/* new drop down color  background-color: #08021d;; 
+
+new background color for fields #04010F */
 
 

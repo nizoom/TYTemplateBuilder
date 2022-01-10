@@ -1,4 +1,4 @@
-import React, {useState, useEffect} from 'react';
+import React, {useState} from 'react';
 import './dropdown.css'
 
 
@@ -12,18 +12,23 @@ const Dropdown = ( props ) => {
         
     }
 
+    const initTemplateDecision = (option) => {
+        setDropdownstatus(!dropdownStatus)
+        props.getTemplateDecision(option)
+
+    }
 
 
     const renderList = props.options.map((option, index) => {
 
-        return <li key = {index} onClick = {() => props.getTemplateDecision(option)}>{option}</li>
+        return <li key = {index} onClick = {() => initTemplateDecision(option)}>{option}</li>
 
     })
 
-    useEffect(() => {
+    // useEffect(() => {
         
  
-    })
+    // })
   
 
    

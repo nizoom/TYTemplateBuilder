@@ -2,12 +2,31 @@
     background-color: white;
     border: none;
     height: 30px;
-    width: 135px;
+    width: 120px;
     color: black;
     text-align: center;
+    border-bottom: 2px solid rgb(199, 205, 224);
+    color: #71A9B2;
+    background-color: #04010F;;
 
 }
 
+.add-donor-btn{
+
+    border: none;
+    background-color: white;
+    height: 30px;
+    width: 30px;
+    border-radius: 5px;
+    border-bottom: 2px solid rgb(199, 205, 224);
+    color: #71A9B2;
+    background-color: #04010F;;
+   
+}
+
+.short-input-field::placeholder{
+    color: #71A9B2;
+}
 /* .first-name{
 
 }
