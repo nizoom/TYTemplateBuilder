@@ -1,0 +1,6 @@
+.new-donor-form-wrapper{
+        font-size: large;
+        grid-column: span 3;
+        grid-row: row 2;
+        width: 570px;
+}

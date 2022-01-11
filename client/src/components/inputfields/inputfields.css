@@ -20,17 +20,44 @@
     border-radius: 5px;
     border-bottom: 2px solid rgb(199, 205, 224);
     color: #71A9B2;
-    background-color: #04010F;;
-   
+    background-color: #04010F;
+    cursor: pointer;   
+}
+
+.add-donor-btn-wrapper{
+  display: flex;
+  flex-direction: row;
+  
+  align-items: center;
+}
+
+.add-donor-btn:hover + .tooltip{
+   visibility: visible;
+}
+.tooltip{
+   visibility: hidden;
+   font-size: xx-small;
+   background-color: rgb(207, 207, 154);
+   padding: 4px;
+   border-radius: 2px;
+   margin-left: 5px;
+
 }
 
 .short-input-field::placeholder{
     color: #71A9B2;
 }
-/* .first-name{
 
+.additional-donor-field{
+  margin-top: 10px;
+  display: flex;
+  flex-direction: row;
+  /* justify-content: space-between; */
+  gap: 23px;
+  align-items: center;
+  width: 450px;
+
+  margin-left: 128px;
+  /* grid-template-columns: 150px 10px 150px 150px;
+  grid-template-rows: 1; */
 }
-
-.last-name{
-
-} */

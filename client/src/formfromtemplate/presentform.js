@@ -3,8 +3,6 @@ import NewDonorForm from './forms/newdonorform';
 
 const PresentForm = (props) => {
 
-        console.log('yo')
-
         if(props.templateType === null){
             return null
         }

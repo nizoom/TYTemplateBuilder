@@ -1,11 +1,22 @@
 import React from 'react';
 import './inputfields.css';
 
-const AddDonorBtn = () => {
+const AddDonorBtn = (props) => {
+
+    const initDonorFieldChange = (e) => {
+
+        e.preventDefault();
+
+     
+        props.changeNumberOfNameFields();
+ 
+    }
+
 
     return (
-        <div>
-            <button className='add-donor-btn'> + </button>
+        <div className = 'add-donor-btn-wrapper'>
+            <button className='add-donor-btn' onClick={initDonorFieldChange}> {props.operation} </button>
+            <p className='tooltip'> {props.tooltipMsg} </p>
         </div>
     )
 }
