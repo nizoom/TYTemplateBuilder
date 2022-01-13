@@ -1,5 +1,6 @@
 import React from 'react';
 import NewDonorForm from './forms/newdonorform';
+import HonorForm from '../components/honoreecomponents/honorform';
 
 const PresentForm = (props) => {
 
@@ -9,16 +10,19 @@ const PresentForm = (props) => {
 
         if(props.templateType === 'New donor'){
             console.log('new donor')
-            return <NewDonorForm/>
+            return <NewDonorForm changeToHonorForm = {props.changeToHonorForm}/>
         }
 
         if(props.templateType === 'Recurring donor'){
             return //recurring donor form.js
         }
 
-        //else 
+       if(props.templateType === 'Honoring'){
+           console.log('honoring')
+           return <HonorForm/>
+       }
 
-         return //honoree form.js
+     
     
      
     

@@ -16,6 +16,12 @@ function App() {
     setTemplateType(type)
     setStepStr('Step 2: fill out fields')
   }
+
+  function changeToHonorForm(){
+    console.log('changing to honor form')
+    setTemplateType('honoring')
+    // setStepStr('Step 2.5: set up honoree email')
+  }
  
 
   return (
@@ -35,9 +41,9 @@ function App() {
               <label className = 'template-field-name'> Template Type: </label>
 
               <Dropdown  prefill = 'Choose template type' cssClass = 'long-dropdown' 
-              options = {['New donor', 'Recurring donor', 'Honoree']} getTemplateDecision = {getTemplateDecision}/> 
+              options = {['New donor', 'Recurring donor', 'Honoree']} getDropdownDecision = {getTemplateDecision}/> 
 
-              <PresentForm templateType = {templateType}/>
+              <PresentForm templateType = {templateType} changeToHonorForm = {changeToHonorForm}/>
 
           
 

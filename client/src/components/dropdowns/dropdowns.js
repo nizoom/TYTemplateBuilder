@@ -14,7 +14,7 @@ const Dropdown = ( props ) => {
 
     const initTemplateDecision = (option) => {
         setDropdownstatus(!dropdownStatus)
-        props.getTemplateDecision(option)
+        props.getDropdownDecision(option)
 
     }
 
@@ -25,11 +25,6 @@ const Dropdown = ( props ) => {
 
     })
 
-    // useEffect(() => {
-        
- 
-    // })
-  
 
    
 

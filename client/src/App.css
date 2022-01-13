@@ -105,3 +105,9 @@ body{
   color: #71A9B2;
   border-bottom: 2px solid rgb(199, 205, 224);
 }
+
+input::-webkit-outer-spin-button,
+input::-webkit-inner-spin-button {
+    -webkit-appearance: none;
+    margin: 0;
+}
