@@ -4,6 +4,13 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+.form-visualizer-grid{
+  display: grid;
+  gap: 40px;
+  grid-template-columns: 50% 50%;
+  position: absolute;
+}
+
 .App{
   margin: 15px 0 25px 25px;
 }
@@ -27,7 +34,7 @@ body{
 .form-wrapper{
   display: grid;
   grid-gap: 1fr;
-  grid-template-columns: 150px 10px 150px 150px;
+  grid-template-columns: 150px 10px 150px 150px 200px;
   grid-template-rows: auto;
   justify-content: start;
   margin: 0;
@@ -111,3 +118,4 @@ input::-webkit-inner-spin-button {
     -webkit-appearance: none;
     margin: 0;
 }
+

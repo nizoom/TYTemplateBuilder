@@ -1,6 +1,6 @@
 import './App.css';
 import Dropdown from './components/dropdowns/dropdowns';
-// import StandardInputField from './components/inputfields/standardinputfield';
+import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
 
 import React, {useState} from 'react'
@@ -34,21 +34,30 @@ function App() {
 
       <h3 className='step'> {stepStr} </h3>
 
-      <form className = 'main-form'>
-        <div className = 'form-wrapper'>
+      <div className='form-visualizer-grid'>
+
+          <form className = 'main-form'>
+            <div className = 'form-wrapper'>
 
 
-              <label className = 'template-field-name'> Template Type: </label>
+                  <label className = 'template-field-name'> Template Type: </label>
 
-              <Dropdown  prefill = 'Choose template type' cssClass = 'long-dropdown' 
-              options = {['New donor', 'Recurring donor', 'Honoree']} getDropdownDecision = {getTemplateDecision}/> 
+                  <Dropdown  prefill = 'Choose template type' cssClass = 'long-dropdown' 
+                  options = {['New donor', 'Recurring donor', 'Honoree']} getDropdownDecision = {getTemplateDecision}/> 
 
-              <PresentForm templateType = {templateType} changeToHonorForm = {changeToHonorForm}/>
+                  <PresentForm templateType = {templateType} changeToHonorForm = {changeToHonorForm}/>
 
-          
 
-        </div>
-      </form>
+
+            </div>
+
+        
+          </form>
+
+        <Visualizer visualizerType = {templateType}/>
+
+      </div>
+  
     </div>
   );
 }
