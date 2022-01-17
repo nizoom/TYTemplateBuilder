@@ -12,7 +12,7 @@ const DonationDate = (props) => {
         <div className='donation-amount-wrapper'> 
             <label> Donation Date: </label>
 
-            <StandardInputField type = {'date'} cssClass = 'short-input-field'/>
+            <StandardInputField type = {'date'} cssClass = 'short-input-field' updateUserChoice = {props.updateUserChoice} updateKey = 'donationDate'/>
 
         </div>
     )

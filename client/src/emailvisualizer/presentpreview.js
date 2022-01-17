@@ -8,7 +8,6 @@ const PresentPreview = (props) => {
     }
 
     if(props.visualizerType === 'New donor'){
-        console.log('new donor preview')
         return <NewDonorPreview/>
     }
 

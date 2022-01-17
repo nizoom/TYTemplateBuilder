@@ -9,7 +9,6 @@ const PresentForm = (props) => {
         }
 
         if(props.templateType === 'New donor'){
-            console.log('new donor')
             return <NewDonorForm changeToHonorForm = {props.changeToHonorForm} updateUserChoice = {props.updateUserChoice}/>
         }
 

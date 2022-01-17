@@ -13,7 +13,10 @@ const StandardInputField = (props) => {
       
       setValue(userInput)
 
-      props.updateUserChoice(value)
+      let key = props.updateKey
+    //   console.log({[key]: 'poop'}
+    //   )
+      props.updateUserChoice({[key] : userInput})
      
       // setValue((prevValue ) => {
       //   prevValue.substring(0, )

@@ -12,7 +12,7 @@ const DonationAmount = (props) => {
     // }
 
     useEffect(() => {
-        console.log(dollar)
+       props.updateUserChoice({donationAmount: dollar})
     },[dollar])
 
     return (

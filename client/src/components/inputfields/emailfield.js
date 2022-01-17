@@ -12,7 +12,7 @@ const EmailField = (props) => {
         <div className='email-feild-wrapper'> 
             <label> Recipient Email: </label>
 
-            <StandardInputField type = {'email'} cssClass = 'short-input-field' prefill='abc@123.com'/>
+            <StandardInputField type = {'email'} cssClass = 'short-input-field' prefill='abc@123.com' updateKey = 'recipientEmail' updateUserChoice = {props.updateUserChoice}/>
 
         </div>
     )

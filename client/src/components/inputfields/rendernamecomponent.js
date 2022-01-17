@@ -46,9 +46,9 @@ const RenderNameComponent = (props) => {
     const renderAdditionalDonorNameFields = numberOfNewNames.map((newName, index) => {
     
         return  <div key = {index} className='additional-donor-field'>
-                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' />
+                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName'/>
 
-                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' />
+                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName'/>
 
                     <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name'/>
                 </div>
@@ -68,9 +68,9 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateUserChoice = {props.updateUserChoice}/>
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateUserChoice = {props.updateUserChoice} updateKey = 'donorFirstName'/>
 
-                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name'/>
+                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateUserChoice = {props.updateUserChoice} updateKey = 'donorLastName' />
 
                 <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name'/>
 

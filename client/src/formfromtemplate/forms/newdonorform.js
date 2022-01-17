@@ -18,11 +18,11 @@ const NewDonorForm = (props) => {
             
             <HonoringDropdown changeToHonorForm = {props.changeToHonorForm}/>
 
-            <DonationAmount/>
+            <DonationAmount updateUserChoice = {props.updateUserChoice}/>
 
-            <DonationDate/>
+            <DonationDate updateUserChoice = {props.updateUserChoice}/>
 
-            <EmailField/>
+            <EmailField updateUserChoice = {props.updateUserChoice}/>
 
             <TaxParaDropdown/>
             

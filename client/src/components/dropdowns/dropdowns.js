@@ -14,7 +14,7 @@ const Dropdown = ( props ) => {
 
     const initTemplateDecision = (option) => {
         setDropdownstatus(!dropdownStatus)
-        props.getDropdownDecision(option)
+        props.updateUserChoice({templateType : option})
 
     }
 
