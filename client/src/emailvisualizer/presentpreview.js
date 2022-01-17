@@ -1,5 +1,5 @@
 import React from 'react';
-import PresentNewDonor from './previewnewdonor';
+import NewDonorPreview from './previewnewdonor';
 
 const PresentPreview = (props) => {
 
@@ -9,7 +9,7 @@ const PresentPreview = (props) => {
 
     if(props.visualizerType === 'New donor'){
         console.log('new donor preview')
-        return <PresentNewDonor/>
+        return <NewDonorPreview/>
     }
 
     if(props.visualizerType === 'Recurring donor'){

@@ -5,6 +5,7 @@ import HonoringDropdown from '../../components/honoreecomponents/honoringdropdow
 import DonationAmount from '../../components/inputfields/donationamount';
 import DonationDate from '../../components/inputfields/donationdate';
 import EmailField from '../../components/inputfields/emailfield';
+import TaxParaDropdown from '../../components/dropdowns/taxparadropdwn/taxparadrpdwn';
 
 
 const NewDonorForm = (props) => {
@@ -23,6 +24,7 @@ const NewDonorForm = (props) => {
 
             <EmailField/>
 
+            <TaxParaDropdown/>
             
         </div>
 

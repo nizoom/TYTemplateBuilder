@@ -4,10 +4,16 @@ body{
   font-family: 'Roboto', sans-serif;
 }
 
+.step{
+  /* grid-column: span 1;
+  grid-row: row 1; */
+}
+
 .form-visualizer-grid{
   display: grid;
   gap: 40px;
   grid-template-columns: 50% 50%;
+  /* grid-template-rows: 0; */
   position: absolute;
 }
 
