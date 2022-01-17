@@ -9,10 +9,26 @@ function App() {
 
   const [templateType, setTemplateType] = useState(null);
 
+  // track all user inputs on the form
+
+  const [userChoices, setUserChoices] = useState({
+    // maybe add template type to this object rather than having a seperate hook for that 
+      donorName : '',// if more than one ( + btn was used ) hold the value of this property in an array 
+      donationAmount: '',
+      donationDate : '',
+      repientEmail : '',
+      taxParagaphe : true
+  })
+
+  function updateUserChoice(choice){
+    console.log(choice)
+  }
+
+
   const [stepStr, setStepStr] = useState('Step 1: Choose template type')
 
   function getTemplateDecision(type){
-
+    //passes template type decision to Present Form component as a prop
     setTemplateType(type)
     setStepStr('Step 2: fill out fields')
   }
@@ -45,7 +61,7 @@ function App() {
                   <Dropdown  prefill = 'Choose template type' cssClass = 'long-dropdown' 
                   options = {['New donor', 'Recurring donor', 'Honoree']} getDropdownDecision = {getTemplateDecision}/> 
 
-                  <PresentForm templateType = {templateType} changeToHonorForm = {changeToHonorForm}/>
+                  <PresentForm templateType = {templateType} changeToHonorForm = {changeToHonorForm} updateUserChoice = {updateUserChoice}/>
 
 
 

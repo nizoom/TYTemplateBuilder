@@ -68,9 +68,9 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' />
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateUserChoice = {props.updateUserChoice}/>
 
-                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' />
+                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name'/>
 
                 <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name'/>
 
