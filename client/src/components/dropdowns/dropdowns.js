@@ -12,16 +12,26 @@ const Dropdown = ( props ) => {
         
     }
 
-    const initTemplateDecision = (option) => {
+    const initDropdwnDecision = (option) => {
+
         setDropdownstatus(!dropdownStatus)
-        props.updateUserChoice({templateType : option})
+  
+        if(props.updateKey === 'template'){
+
+            props.updateStep('form')
+
+        } 
+        const key = props.updateKey
+        props.updateUserChoice({ [key] : option})
+    
+      
 
     }
 
 
     const renderList = props.options.map((option, index) => {
 
-        return <li key = {index} onClick = {() => initTemplateDecision(option)}>{option}</li>
+        return <li key = {index} onClick = {() => initDropdwnDecision(option)}>{option}</li>
 
     })
 

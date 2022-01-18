@@ -1,11 +1,8 @@
-import React, {useState} from 'react';
+import React from 'react';
 import StandardInputField from './standardinputfield';
 
 const DonationDate = (props) => {
 
-    const [date, setDate] = useState()
-
-    // GOING TO NEED TO WIRE BACK THE ONCHANGE 
 
     return (
         // this class name has the styles needed even though it is the wrong name

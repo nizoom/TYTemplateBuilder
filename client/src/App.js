@@ -3,30 +3,30 @@ import Dropdown from './components/dropdowns/dropdowns';
 import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
 
-import React, {useState, useEffect} from 'react'
+import React, {useState} from 'react'
 
 function App() {
 
-  const [templateType, setTemplateType] = useState(null);
 
   // track all user inputs on the form
 
   const [userChoices, setUserChoices] = useState({
     // maybe add template type to this object rather than having a seperate hook for that 
-      templateType : null,
+      templateType : 'Choose Template Type',
       donorFirstName : '',// if more than one ( + btn was used ) hold the value of this property in an array \
       donorLastName : '',
-      donationAmount: '',
-      donationDate : '',
+      donationAmount: '0',
+      donationDate : 'mm/dd/yyyy',
       recipientEmail : '',
-      taxParagaphe : true
+      taxParagraph : true
   })
+
 
   function updateUserChoice(choice){
     // console.log(Object.keys(choice))
     const [keyName] = Object.keys(choice);
     const [valueName] = Object.values(choice)
-    console.log(`${keyName} : ${valueName}`)
+    // console.log(`${keyName} : ${valueName}`)
     setUserChoices({
       ...userChoices,
       [keyName] : valueName
@@ -35,17 +35,22 @@ function App() {
     // console.log(userChoices)
   } 
 
-  useEffect(() => {
-    console.log(userChoices.recipientEmail)
-  })
+  // useEffect(() => {
+  //   console.log(userChoices.taxParagraph)
+  // })
 
 
   const [stepStr, setStepStr] = useState('Step 1: Choose template type')
 
+  function updateStep (update) {
+    console.log(update)
+    setStepStr('Step 2: Fill out form')
+  }
+
   function changeToHonorForm(){
     console.log('changing to honor form')
-    setTemplateType('honoring')
-    // setStepStr('Step 2.5: set up honoree email')
+
+  
   }
  
 
@@ -67,8 +72,8 @@ function App() {
 
                   <label className = 'template-field-name'> Template Type: </label>
 
-                  <Dropdown  prefill = 'Choose template type' cssClass = 'long-dropdown' 
-                  options = {['New donor', 'Recurring donor', 'Honoree']} updateUserChoice = {updateUserChoice}/> 
+                  <Dropdown  prefill = {userChoices.templateType} cssClass = 'long-dropdown' 
+                  options = {['New donor', 'Recurring donor', 'Honoree']} updateUserChoice = {updateUserChoice} updateStep = {updateStep} updateKey = 'templateType'/> 
 
                   <PresentForm templateType = {userChoices.templateType} changeToHonorForm = {changeToHonorForm} updateUserChoice = {updateUserChoice}/>
 
@@ -79,7 +84,7 @@ function App() {
         
           </form>
 
-        <Visualizer visualizerType = {userChoices.templateType}/>
+        <Visualizer userChoices = {userChoices}/>
 
       </div>
   

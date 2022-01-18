@@ -6,7 +6,7 @@ const Visualizer = (props) => {
     return (
         <section className='msg-wrapper'>
             <div className='inner-content'>   
-                <PresentPreview visualizerType = {props.visualizerType}/>
+                <PresentPreview userChoices = {props.userChoices}/>
 
             </div>
         </section>

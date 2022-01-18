@@ -8,7 +8,7 @@ import EmailField from '../../components/inputfields/emailfield';
 import TaxParaDropdown from '../../components/dropdowns/taxparadropdwn/taxparadrpdwn';
 
 
-const NewDonorForm = (props) => {
+const DonationForm = (props) => {
 
     //  THIS MAY BE THE SAME AS RECURRING DONOR FORM BC THE ONLY DIFFERENCE IS IN THE COPY LANGUAGE 
 
@@ -24,7 +24,7 @@ const NewDonorForm = (props) => {
 
             <EmailField updateUserChoice = {props.updateUserChoice}/>
 
-            <TaxParaDropdown/>
+            <TaxParaDropdown updateUserChoice = {props.updateUserChoice}/>
             
         </div>
 
@@ -32,4 +32,4 @@ const NewDonorForm = (props) => {
 
 }
 
-export default NewDonorForm;
+export default DonationForm;

@@ -1,25 +1,26 @@
 import React from 'react';
-import NewDonorForm from './forms/newdonorform';
+import DonationForm from './forms/donationform';
 import HonorForm from '../components/honoreecomponents/honorform';
 
 const PresentForm = (props) => {
 
-        if(props.templateType === null){
-            return null
-        }
+    
 
         if(props.templateType === 'New donor'){
-            return <NewDonorForm changeToHonorForm = {props.changeToHonorForm} updateUserChoice = {props.updateUserChoice}/>
+            return <DonationForm changeToHonorForm = {props.changeToHonorForm} updateUserChoice = {props.updateUserChoice}/>
         }
 
         if(props.templateType === 'Recurring donor'){
-            return //recurring donor form.js
+            return <DonationForm changeToHonorForm = {props.changeToHonorForm} updateUserChoice = {props.updateUserChoice}/>
         }
 
        if(props.templateType === 'Honoring'){
            console.log('honoring')
            return <HonorForm/>
        }
+       // else
+
+       return null
 
      
     
