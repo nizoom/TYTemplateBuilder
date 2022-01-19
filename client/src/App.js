@@ -13,12 +13,13 @@ function App() {
   const [userChoices, setUserChoices] = useState({
     // maybe add template type to this object rather than having a seperate hook for that 
       templateType : 'Choose Template Type',
-      donorFirstName : '',// if more than one ( + btn was used ) hold the value of this property in an array \
+      donorFirstName : 'Donor',// if more than one ( + btn was used ) hold the value of this property in an array \
       donorLastName : '',
       donationAmount: '0',
       donationDate : 'mm/dd/yyyy',
       recipientEmail : '',
-      taxParagraph : true
+      taxParagraph : true,
+      donorNames : [] //arr of objects with firstName and lastName properties for each element
   })
 
 

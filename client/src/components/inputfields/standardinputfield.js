@@ -7,26 +7,38 @@ const StandardInputField = (props) => {
 
     const [value, setValue] = useState('')
 
+
+    
+
     function handleChange(event){
-      
+
       const userInput = event.target.value;
       
       setValue(userInput)
 
       let key = props.updateKey
-    //   console.log({[key]: 'poop'}
-    //   )
-      props.updateUserChoice({[key] : userInput})
-     
-      // setValue((prevValue ) => {
-      //   prevValue.substring(0, )
-      // })
+
+
+      if(props.type === 'name') {
+
+        props.handleNameChange({[key] : userInput, index : props.index})
+
+      } else {
+
+        //not a name field
+
+        
+        props.updateUserChoice({[key] : userInput})
+
+      }
+      
    
+
+     
+
     }
 
-    // useEffect(() => {
-    //     props.updateUserChoice(value)
-    // }, [value])
+
  
  
     return(

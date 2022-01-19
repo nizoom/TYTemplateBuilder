@@ -4,7 +4,7 @@ import CurrencyInput from 'react-currency-input-field';
 
 const DonationAmount = (props) => {
 
-    const [dollar, setDollar] = useState()
+    const [dollar, setDollar] = useState('0')
 
     // function handleAmountChange(value, name){
     //     console.log(value)
