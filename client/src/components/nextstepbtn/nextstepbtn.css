@@ -1,6 +1,7 @@
 .next-stp-wrapper{
     
     margin-top: 25px;
+    margin-bottom: 25px;
 }
 
 .next-stp-btn {
@@ -42,3 +43,8 @@
     opacity: 1;
     transition: 1s
   }
+
+.next-stp-btn p {
+    margin: 0;
+    padding: 0;
+}

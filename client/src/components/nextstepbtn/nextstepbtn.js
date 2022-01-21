@@ -52,7 +52,7 @@ const NextStepBtn = (props) => {
         const blankFields = formValidation();
        
         if(blankFields.length === 0){
-             //init next form
+             props.initNextPreviousForm(1)
         } else {
             // alert user to required fields 
             props.reportIncompleteFields(blankFields)
@@ -62,8 +62,11 @@ const NextStepBtn = (props) => {
     }
     return (
         <div className = 'next-stp-wrapper'>
-            <button onClick ={handleNextStepClick} className = 'next-stp-btn' type = 'submit'> Next <span>&#8594;</span>
-  </button>
+            <button 
+                onClick ={handleNextStepClick} className = 'next-stp-btn' type = 'submit'> {props.page === 1 ? 
+                    <p> Next <span> &#8594;</span>  </p>: 
+                    <p> <span> &#8592;</span> Back   </p>} 
+            </button>
         </div>
     )
 }
