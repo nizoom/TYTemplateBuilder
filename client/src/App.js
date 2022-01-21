@@ -36,10 +36,6 @@ function App() {
     // console.log(userChoices)
   } 
 
-  // useEffect(() => {
-  //   console.log(userChoices)
-  // })
-
 
   const [stepStr, setStepStr] = useState('Step 1: Choose template type')
 
@@ -47,12 +43,36 @@ function App() {
     setStepStr('Step 2: Fill out form')
   }
 
-  function changeToHonorForm(){
-    console.log('changing to honor form')
+  //create state obj to track invalid inputs preventing next click 
 
-  
-  }
- 
+  const [incompleteFields, setIncompleteFields] = useState({
+      donationAmount: false,
+      donationDate : false,
+      recipientEmail : false,
+      donorNames : false 
+  })
+
+  function reportIncompleteFields(fields){
+    
+    const newValidationState = {...incompleteFields}
+
+    for(const property in newValidationState){
+      //property is key and newValidationState[property] is value
+
+        //if a field in the list of invalid fields is there then mark that field as truly invalid in the newValidationState obj
+        if(fields.includes(property)){
+          newValidationState[property] = true;
+        } else {  //if property is not included in fields arr then mark as false / complete
+          newValidationState[property] = false
+        }
+    }
+
+    setIncompleteFields(newValidationState)
+  } 
+
+  // useEffect(() => {
+  //   console.log(incompleteFields)
+  // }, [incompleteFields])
 
   return (
 
@@ -73,15 +93,15 @@ function App() {
                   <label className = 'template-field-name'> Template Type: </label>
 
                   <Dropdown  prefill = {userChoices.templateType} cssClass = 'long-dropdown' 
-                  options = {['New donor', 'Recurring donor', 'Honoree']} updateUserChoice = {updateUserChoice} updateStep = {updateStep} updateKey = 'templateType'/> 
+                  options = {['New donor', 'Recurring donor']} updateUserChoice = {updateUserChoice} updateStep = {updateStep} updateKey = 'templateType'/> 
 
-                  <PresentForm templateType = {userChoices.templateType} changeToHonorForm = {changeToHonorForm} updateUserChoice = {updateUserChoice} userChoices = {userChoices}/>
+                  <PresentForm templateType = {userChoices.templateType} updateUserChoice = {updateUserChoice} userChoices = {userChoices} incompleteFields = {incompleteFields}/>
 
 
 
             </div>
 
-                 {userChoices.templateType === 'Choose Template Type' ? null : <NextStepBtn userChoices = {userChoices} />}
+                 {userChoices.templateType === 'Choose Template Type' ? null : <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields}/> }
         
           </form>
 

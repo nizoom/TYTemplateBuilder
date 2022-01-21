@@ -125,3 +125,16 @@ input::-webkit-inner-spin-button {
     margin: 0;
 }
 
+.incomplete{
+  border: 3px solid red;
+  /* border: none; */
+  height: 30px;
+  width: 120px;
+  color: black;
+  text-align: center;
+  color: #71A9B2;
+  background-color: #04010F;
+  font-family:'Roboto', sans-serif;
+  font-size: 11px;
+  border-radius: 3px;
+}

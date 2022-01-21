@@ -7,7 +7,7 @@ const PresentForm = (props) => {
     
 
         if(props.templateType === 'New donor' || props.templateType === 'Recurring donor'){
-            return <DonationForm changeToHonorForm = {props.changeToHonorForm} updateUserChoice = {props.updateUserChoice} userChoices = {props.userChoices}/>
+            return <DonationForm changeToHonorForm = {props.changeToHonorForm} updateUserChoice = {props.updateUserChoice} userChoices = {props.userChoices} incompleteFields = {props.incompleteFields}/>
         }
 
        if(props.templateType === 'Honoring'){

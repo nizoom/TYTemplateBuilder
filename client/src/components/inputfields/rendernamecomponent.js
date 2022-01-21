@@ -109,9 +109,9 @@ const RenderNameComponent = (props) => {
     const renderAdditionalDonorNameFields = numberOfNewNames.map((newName, index) => {
     
         return  <div key = {index} className='additional-donor-field'>
-                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1}/>
+                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false}/>
 
-                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index + 1}/>
+                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false}/>
 
                     <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name' index = {index + 1}/>
                 </div>
@@ -131,9 +131,9 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0}/>
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields}/>
 
-                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0}/>
+                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false}/>
 
                 <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0}/>
 

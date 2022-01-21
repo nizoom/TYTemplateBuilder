@@ -10,19 +10,18 @@ import TaxParaDropdown from '../../components/dropdowns/taxparadropdwn/taxparadr
 
 const DonationForm = (props) => {
 
-    //  THIS MAY BE THE SAME AS RECURRING DONOR FORM BC THE ONLY DIFFERENCE IS IN THE COPY LANGUAGE 
 
     return(
         <div className='new-donor-form-wrapper'>
-            <RenderNameComponent updateUserChoice = {props.updateUserChoice}/>
+            <RenderNameComponent updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donorNames}/>
             
             {/* <HonoringDropdown changeToHonorForm = {props.changeToHonorForm}/> */}
 
-            <DonationAmount updateUserChoice = {props.updateUserChoice}/>
+            <DonationAmount updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donationAmount}/>
 
-            <DonationDate updateUserChoice = {props.updateUserChoice}/>
+            <DonationDate updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donationDate}/>
 
-            <EmailField updateUserChoice = {props.updateUserChoice}/>
+            <EmailField updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.recipientEmail}/>
 
             <TaxParaDropdown updateUserChoice = {props.updateUserChoice} userChoices = {props.userChoices}/>
             

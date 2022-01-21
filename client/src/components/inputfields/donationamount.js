@@ -18,11 +18,10 @@ const DonationAmount = (props) => {
     return (
         <div className='donation-amount-wrapper'>
             <label> Amount Given: </label>
-            <CurrencyInput   prefix='$' className='short-input-field' placeholder='$' onValueChange={(value, name) => setDollar(value)}/> 
+            <CurrencyInput   prefix='$' className= {props.incompleteFields ?  'incomplete' : 'short-input-field'} placeholder={props.incompleteFields  ? '$ required' :'$'} onValueChange={(value, name) => setDollar(value)}/> 
         </div>
     )
 }
 
 export default DonationAmount;
 
-// className='short-input-field'

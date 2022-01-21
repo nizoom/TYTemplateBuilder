@@ -28,8 +28,6 @@ const NextStepBtn = (props) => {
         const checkDate = checkProperty(JSON.stringify(defaultInputState.donationDate), JSON.stringify(shallowCopyOfState.donationDate), 'donationDate')
         const checkEmail = checkProperty(JSON.stringify(defaultInputState.recipientEmail), JSON.stringify(shallowCopyOfState.recipientEmail), 'recipientEmail')
         const checkName = checkProperty(JSON.stringify(defaultInputState.donorNames), JSON.stringify(shallowCopyOfState.donorNames), 'donorNames')
-        
-        console.log(checkDonation, checkDate, checkEmail, checkName)
 
         //arr of false results AKA the user needs to look at it again 
         let alertUser = []
@@ -41,7 +39,6 @@ const NextStepBtn = (props) => {
                alertUser.push(result)
            }
         })
-        console.log(alertUser)
         return alertUser;
     }
 
@@ -58,13 +55,14 @@ const NextStepBtn = (props) => {
              //init next form
         } else {
             // alert user to required fields 
+            props.reportIncompleteFields(blankFields)
         }
        
 
     }
     return (
         <div className = 'next-stp-wrapper'>
-            <button onClick ={handleNextStepClick} className = 'next-stp-btn'> Next <span>&#8594;</span>
+            <button onClick ={handleNextStepClick} className = 'next-stp-btn' type = 'submit'> Next <span>&#8594;</span>
   </button>
         </div>
     )

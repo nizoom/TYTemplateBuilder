@@ -37,7 +37,8 @@ const StandardInputField = (props) => {
     return(
         <div className='input-field-position'> 
    
-            <input className={props.cssClass} placeholder={props.prefill} onChange={handleChange} value = {value} type = {props.type}/>
+            <input className={props.incompleteFields ?  'incomplete' : props.cssClass} placeholder={ props.incompleteFields ? props.prefill + ' required' : props.prefill} 
+            onChange={handleChange} value = {value} type = {props.type}/>
 
           
         </div>
