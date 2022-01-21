@@ -1,4 +1,4 @@
-import React, {useState} from 'react';
+import React, {useState, useEffect} from 'react';
 import StandardInputField from './standardinputfield';
 import AddDonorBtn from './+donorfield';
 import './inputfields.css'
@@ -11,17 +11,7 @@ const RenderNameComponent = (props) => {
 
     //because there could be multiple names collecting all names is required before updating state at the root. Otherwise each new name would overwrite the last
 
-    function updateNameState(numberOfNewNames){
-        //number of donorfields tells updateNameState how many names to expect 
-        const totalDonorNames = numberOfNewNames + 1 //new plus original field
-        // console.log(numberOfNewNames)
-        console.log(names)
-        //get names 
-        
-        //update state at the app.js
-    }
-
-    function handleNameChange(name){
+    function updateNames(name){
 
             const index = name.index
 
@@ -42,11 +32,9 @@ const RenderNameComponent = (props) => {
             // save array to hook
             setNames(newArr)
 
-        updateNameState(donorFields.numberOfFields)
+            
        
     }
-
-
 
     const [donorFields, setDonorFields] = useState({numberOfFields : 0});
 
@@ -56,6 +44,15 @@ const RenderNameComponent = (props) => {
             donorLastName : ''
         }
     ])
+
+
+    useEffect(() => {
+        props.updateUserChoice({donorNames : names})
+    }, [names])
+
+
+
+    
   
     function addNewDonorName(){
 
@@ -68,14 +65,34 @@ const RenderNameComponent = (props) => {
         });
     }
 
-    function deleteNewDonorName(){
+    function deleteNewDonorName(btnIndex){
 
-        let updatedNumber = donorFields.numberOfFields - 1
+        const updatedNumber = donorFields.numberOfFields - 1
 
         setDonorFields({
             ...donorFields,
             numberOfFields : updatedNumber
         })
+
+        //get index of btn and use that index to delete name element in names hook
+
+        let oldArr = [...names];
+
+        let newArr = oldArr.filter(element => {
+            //keep elements that do not have the index of btnIndex - 1 (the -1 compensates for the misalignment of the arrays due to the index + 1 prop below on the renderAdditionalDonor.. function)
+            if(oldArr.indexOf(element) !== btnIndex){
+                return element
+            }
+            
+        })
+
+        console.log(btnIndex)
+
+        // console.log(names[btnIndex])
+
+        setNames(newArr)
+
+
     }
 
     const numberOfFields = donorFields.numberOfFields;
@@ -92,11 +109,11 @@ const RenderNameComponent = (props) => {
     const renderAdditionalDonorNameFields = numberOfNewNames.map((newName, index) => {
     
         return  <div key = {index} className='additional-donor-field'>
-                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' handleNameChange = {handleNameChange} type = "name" index = {index + 1}/>
+                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1}/>
 
-                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' handleNameChange = {handleNameChange} type = "name" index = {index + 1}/>
+                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index + 1}/>
 
-                    <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name'/>
+                    <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name' index = {index + 1}/>
                 </div>
 
 
@@ -114,11 +131,11 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' handleNameChange = {handleNameChange} updateKey = 'donorFirstName' type = "name" index = {0}/>
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0}/>
 
-                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' handleNameChange = {handleNameChange} updateKey = 'donorLastName' type = "name" index = {0}/>
+                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0}/>
 
-                <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name'/>
+                <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0}/>
 
                
 

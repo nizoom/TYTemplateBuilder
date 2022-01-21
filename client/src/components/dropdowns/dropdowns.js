@@ -16,12 +16,14 @@ const Dropdown = ( props ) => {
 
         setDropdownstatus(!dropdownStatus)
   
-        if(props.updateKey === 'template'){
+        if(props.updateKey === 'templateType'){
 
             props.updateStep('form')
 
         } 
+ 
         const key = props.updateKey
+        
         props.updateUserChoice({ [key] : option})
     
       

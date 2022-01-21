@@ -7,9 +7,6 @@ const StandardInputField = (props) => {
 
     const [value, setValue] = useState('')
 
-
-    
-
     function handleChange(event){
 
       const userInput = event.target.value;
@@ -21,7 +18,7 @@ const StandardInputField = (props) => {
 
       if(props.type === 'name') {
 
-        props.handleNameChange({[key] : userInput, index : props.index})
+        props.updateNames({[key] : userInput, index : props.index})
 
       } else {
 
@@ -32,10 +29,6 @@ const StandardInputField = (props) => {
 
       }
       
-   
-
-     
-
     }
 
 

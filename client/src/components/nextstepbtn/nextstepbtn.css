@@ -1,0 +1,44 @@
+.next-stp-wrapper{
+    
+    margin-top: 25px;
+}
+
+.next-stp-btn {
+    background-color: #04010F;
+    border: solid 4px #C7CDE0;
+    color: #61BAD2;
+    padding: 10px;
+    border-radius: 5px;
+    border-top: none;
+    border-right: none;
+    border-left: none;
+    cursor: pointer;
+
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    
+}
+
+.next-stp-btn:hover{
+    background-color: #61BAD2;
+    color: #04010F;
+    border-bottom: none;
+    border-top:solid 4px #C7CDE0;
+
+}
+
+.next-stp-btn:after{
+    padding-top: 300%;
+    padding-left: 350%;
+    margin-left: -20px!important;
+    margin-top: -120%;
+    opacity: 0;
+    transition: all 0.8s
+}
+
+.next-stp-btn:active:after {
+    padding: 0;
+    margin: 0;
+    opacity: 1;
+    transition: 1s
+  }

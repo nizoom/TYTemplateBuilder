@@ -2,8 +2,9 @@ import './App.css';
 import Dropdown from './components/dropdowns/dropdowns';
 import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
+import NextStepBtn from './components/nextstepbtn/nextstepbtn'
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
 
 function App() {
 
@@ -13,17 +14,16 @@ function App() {
   const [userChoices, setUserChoices] = useState({
     // maybe add template type to this object rather than having a seperate hook for that 
       templateType : 'Choose Template Type',
-      donorFirstName : 'Donor',// if more than one ( + btn was used ) hold the value of this property in an array \
-      donorLastName : '',
       donationAmount: '0',
       donationDate : 'mm/dd/yyyy',
       recipientEmail : '',
-      taxParagraph : true,
-      donorNames : [] //arr of objects with firstName and lastName properties for each element
+      taxParagraph : 'Yes',
+      donorNames : [] //arr of objects with firstName and lastName properties for each element    
   })
 
 
   function updateUserChoice(choice){
+    
     // console.log(Object.keys(choice))
     const [keyName] = Object.keys(choice);
     const [valueName] = Object.values(choice)
@@ -37,14 +37,13 @@ function App() {
   } 
 
   // useEffect(() => {
-  //   console.log(userChoices.taxParagraph)
+  //   console.log(userChoices)
   // })
 
 
   const [stepStr, setStepStr] = useState('Step 1: Choose template type')
 
   function updateStep (update) {
-    console.log(update)
     setStepStr('Step 2: Fill out form')
   }
 
@@ -76,16 +75,18 @@ function App() {
                   <Dropdown  prefill = {userChoices.templateType} cssClass = 'long-dropdown' 
                   options = {['New donor', 'Recurring donor', 'Honoree']} updateUserChoice = {updateUserChoice} updateStep = {updateStep} updateKey = 'templateType'/> 
 
-                  <PresentForm templateType = {userChoices.templateType} changeToHonorForm = {changeToHonorForm} updateUserChoice = {updateUserChoice}/>
+                  <PresentForm templateType = {userChoices.templateType} changeToHonorForm = {changeToHonorForm} updateUserChoice = {updateUserChoice} userChoices = {userChoices}/>
 
 
 
             </div>
 
+                 {userChoices.templateType === 'Choose Template Type' ? null : <NextStepBtn userChoices = {userChoices} />}
         
           </form>
 
         <Visualizer userChoices = {userChoices}/>
+
 
       </div>
   

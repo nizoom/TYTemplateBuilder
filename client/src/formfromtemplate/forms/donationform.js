@@ -16,7 +16,7 @@ const DonationForm = (props) => {
         <div className='new-donor-form-wrapper'>
             <RenderNameComponent updateUserChoice = {props.updateUserChoice}/>
             
-            <HonoringDropdown changeToHonorForm = {props.changeToHonorForm}/>
+            {/* <HonoringDropdown changeToHonorForm = {props.changeToHonorForm}/> */}
 
             <DonationAmount updateUserChoice = {props.updateUserChoice}/>
 
@@ -24,7 +24,7 @@ const DonationForm = (props) => {
 
             <EmailField updateUserChoice = {props.updateUserChoice}/>
 
-            <TaxParaDropdown updateUserChoice = {props.updateUserChoice}/>
+            <TaxParaDropdown updateUserChoice = {props.updateUserChoice} userChoices = {props.userChoices}/>
             
         </div>
 

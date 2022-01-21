@@ -8,7 +8,7 @@ const AddDonorBtn = (props) => {
         e.preventDefault();
 
      
-        props.changeNumberOfNameFields();
+        props.changeNumberOfNameFields(props.index);
  
     }
 
