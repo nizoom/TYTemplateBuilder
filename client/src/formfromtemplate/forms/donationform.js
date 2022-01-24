@@ -13,9 +13,7 @@ const DonationForm = (props) => {
 
     return(
         <div className='new-donor-form-wrapper'>
-            <RenderNameComponent updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donorNames}/>
-            
-            {/* <HonoringDropdown changeToHonorForm = {props.changeToHonorForm}/> */}
+            <RenderNameComponent updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donorNames} updateKey = 'donorNames' inputLabel = 'Donor name:' cssClass='donor-name-wrapper' type = 'donor form'/>
 
             <DonationAmount updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donationAmount}/>
 

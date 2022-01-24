@@ -30,6 +30,7 @@ const RenderNameComponent = (props) => {
             newArr[index][key] = value;
 
             // save array to hook
+            console.log(newArr)
             setNames(newArr)
 
             
@@ -47,7 +48,10 @@ const RenderNameComponent = (props) => {
 
 
     useEffect(() => {
-        props.updateUserChoice({donorNames : names})
+     
+        const stateKey =  props.updateKey
+        // console.log(props.updateKey)
+        props.updateUserChoice({[stateKey] : names})
     }, [names])
 
 
@@ -106,7 +110,7 @@ const RenderNameComponent = (props) => {
 
 
 
-    const renderAdditionalDonorNameFields = numberOfNewNames.map((newName, index) => {
+    const AddtionalNameFields = numberOfNewNames.map((newName, index) => {
     
         return  <div key = {index} className='additional-donor-field'>
                     <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false}/>
@@ -118,16 +122,15 @@ const RenderNameComponent = (props) => {
 
 
     })
-
     
     return (
               <div>
 
-            <div className='donor-name-wrapper'>
+            <div className={props.cssClass}>
 
 
 
-                <label> Donor Name: </label>
+                <label> {props.inputLabel} </label>
         
             
 
@@ -135,24 +138,13 @@ const RenderNameComponent = (props) => {
 
                 <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false}/>
 
-                <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0}/>
+                {props.type === 'donor form' ? <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0} /> : null}
 
                
 
             </div>
-         
-                    {numberOfNewNames.length >= 1 ? 
-                    
-                   
-                    <div>   
-                    
-                     {renderAdditionalDonorNameFields} 
-                     
-                     </div>
-                   
-                    
-                  : null}    
-      
+
+            <RenderAdditionalDonorNameFields numberOfNewNames = {numberOfNewNames} type = {props.type} AddtionalNameFields = {AddtionalNameFields}/>
         </div>
     )
 }
@@ -160,3 +152,11 @@ const RenderNameComponent = (props) => {
 export default RenderNameComponent;
 
 
+const RenderAdditionalDonorNameFields = (props) => {
+       
+    if(props.type === 'donor form' && props.numberOfNewNames.length >= 1){
+        return <div> {props.AddtionalNameFields} </div>
+    }  else {
+        return null
+    }
+}

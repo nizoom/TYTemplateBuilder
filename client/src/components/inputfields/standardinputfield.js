@@ -18,12 +18,13 @@ const StandardInputField = (props) => {
 
       if(props.type === 'name') {
 
+        console.log({[key] : userInput, index : props.index})
+
         props.updateNames({[key] : userInput, index : props.index})
 
       } else {
 
         //not a name field
-
         
         props.updateUserChoice({[key] : userInput})
 
@@ -32,7 +33,10 @@ const StandardInputField = (props) => {
     }
 
 
- 
+  // useEffect(() => {
+  //   console.log(value)
+  // }, [value])
+
  
     return(
         <div className='input-field-position'> 

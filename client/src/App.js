@@ -23,6 +23,7 @@ function App() {
 
 
   function updateUserChoice(choice){
+    // console.log(choice)
     
     // console.log(Object.keys(choice))
     const [keyName] = Object.keys(choice);
@@ -90,8 +91,8 @@ function App() {
   }
 
   // useEffect(() => {
-  //   console.log(incompleteFields)
-  // }, [incompleteFields])
+  //   console.log(userChoices)
+  // }, [userChoices])
 
 
 

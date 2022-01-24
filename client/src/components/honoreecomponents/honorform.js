@@ -40,10 +40,10 @@ const HonorForm = (props) => {
         <div className='form-wrapper'>
             <label className = 'template-field-name'> Honoring: </label>
             <Dropdown prefill = {honoringUserChoices.honorForm} cssClass = 'long-dropdown'  options = {['Yes', 'No']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honorForm'/>
-            { honoringUserChoices.honorForm !== 'Yes' ? 
+            { honoringUserChoices.honorForm === 'Yes' ? 
             
-            <div className='donation-amount-wrapper'> 
-              <RenderNameComponent updateUserChoice = {updateHonorUserChoice} />
+            <div className='honoree-field-wrapper'> 
+              <RenderNameComponent updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form'/>
             </div> : 
             <div className='donation-amount-wrapper'>
                 Continue
