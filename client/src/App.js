@@ -81,7 +81,7 @@ function App() {
     // direction is + 1 or - 1
     if(direction > 0) {
       setFormPage(formPage + 1)
-      setStepStr('Step 3: Fill out honoring form')
+     
     } else {
       setFormPage(formPage  - 1)
     }

@@ -50,15 +50,17 @@ const NextStepBtn = (props) => {
     function handleNextStepClick (e){
         e.preventDefault();
         const blankFields = formValidation();
+        console.log(blankFields)
        
-        if(blankFields.length === 0){
+        if(blankFields.length === 0 && props.page === 1 ){
              props.initNextPreviousForm(1)
-        } else {
+        } if(blankFields.length > 0 && props.page === 1 ) {
             // alert user to required fields 
             props.reportIncompleteFields(blankFields)
+        } if(props.page === 2 ){
+            console.log('goingback')
+            props.initNextPreviousForm(-1)
         }
-       
-
     }
     return (
         <div className = 'next-stp-wrapper'>

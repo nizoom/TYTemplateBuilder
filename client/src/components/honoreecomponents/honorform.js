@@ -49,7 +49,7 @@ const HonorForm = (props) => {
             { honoringUserChoices.honorForm === 'Yes' ? 
 
 
-               <form className='honoree-fields-wrapper'>
+               <section className='honoree-fields-wrapper'>
 
                 <div className='in-honor-memory-wrapper'>
 
@@ -63,18 +63,18 @@ const HonorForm = (props) => {
             
                 <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form'/>            
 
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Recipient name:' cssClass = 'honoree-name-field' type = 'honor form'/>           
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'honor form'/>           
           
                 <CustomMsg/>
        
-                 </form>
+                </section>
             
             : null
 
             }
             <div className='submit-stp-wrapper'>
 
-                <button type = 'submit' className = 'next-stp-btn'> Submit </button>
+                <button type = 'submit' className = 'next-stp-btn submit-btn'> Submit </button>
             </div>
         </div>
     )
