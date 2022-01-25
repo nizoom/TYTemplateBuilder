@@ -18,7 +18,7 @@ const Dropdown = ( props ) => {
   
         if(props.updateKey === 'templateType'){
 
-            props.updateStep('form')
+            props.updateStep(2)
 
         } 
  

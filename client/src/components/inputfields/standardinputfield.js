@@ -5,6 +5,19 @@ import './inputfields.css'
 
 const StandardInputField = (props) => {
 
+    // the values were saved in state when moving btw pages but the old answers wouldn't show in the fields if you moved back / forward
+    //getSavedValue should fix that
+
+    const getSavedValue = () => {
+      console.log(props.userChoices)
+
+
+
+      //if name type do this
+
+
+    }
+
     const [value, setValue] = useState('')
 
     function handleChange(event){
@@ -18,7 +31,7 @@ const StandardInputField = (props) => {
 
       if(props.type === 'name') {
 
-        console.log({[key] : userInput, index : props.index})
+        // console.log({[key] : userInput, index : props.index})
 
         props.updateNames({[key] : userInput, index : props.index})
 

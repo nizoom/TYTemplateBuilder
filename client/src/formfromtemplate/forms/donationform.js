@@ -6,6 +6,7 @@ import DonationAmount from '../../components/inputfields/donationamount';
 import DonationDate from '../../components/inputfields/donationdate';
 import EmailField from '../../components/inputfields/emailfield';
 import TaxParaDropdown from '../../components/dropdowns/taxparadropdwn/taxparadrpdwn';
+import './../../App.css'
 
 
 const DonationForm = (props) => {
@@ -13,7 +14,8 @@ const DonationForm = (props) => {
 
     return(
         <div className='new-donor-form-wrapper'>
-            <RenderNameComponent updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donorNames} updateKey = 'donorNames' inputLabel = 'Donor name:' cssClass='donor-name-wrapper' type = 'donor form'/>
+            <RenderNameComponent updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donorNames} 
+            updateKey = 'donorNames' inputLabel = 'Donor name:' cssClass='donor-name-wrapper' type = 'donor form' userChoices = {props.userChoices}/>
 
             <DonationAmount updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donationAmount}/>
 

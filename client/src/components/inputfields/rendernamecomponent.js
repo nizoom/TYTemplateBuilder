@@ -30,7 +30,7 @@ const RenderNameComponent = (props) => {
             newArr[index][key] = value;
 
             // save array to hook
-            console.log(newArr)
+            // console.log(newArr)
             setNames(newArr)
 
             
@@ -134,7 +134,7 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields}/>
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields} userChoices = {props.userChoices}/>
 
                 <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false}/>
 

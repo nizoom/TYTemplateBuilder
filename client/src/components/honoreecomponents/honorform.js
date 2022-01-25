@@ -4,6 +4,7 @@ import '../nextstepbtn/nextstepbtn.css'
 import './honoree.css'
 import RenderNameComponent from '../inputfields/rendernamecomponent'
 import CustomMsg from './custommsg';
+import EmailField from '../inputfields/emailfield';
 
 const HonorForm = (props) => {
 
@@ -15,7 +16,7 @@ const HonorForm = (props) => {
             honoringOrMemory : 'in Honor or in Memory',
             honoreeName : '',
             recipientName : '',
-            honoreeEmailAddress : '',
+            recipientEmailAddress : '',
             customMsg: ''
     })
 
@@ -33,9 +34,9 @@ const HonorForm = (props) => {
     // console.log(userChoices)
   } 
 
-  // useEffect(() => {
-  //     console.log(honoringUserChoices)
-  // }, [honoringUserChoices])
+  useEffect(() => {
+      console.log(honoringUserChoices)
+  }, [honoringUserChoices])
 
     
     return (
@@ -63,25 +64,26 @@ const HonorForm = (props) => {
             
                 <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form'/>            
 
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'honor form'/>           
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'honor form'/>           
           
-                <CustomMsg/>
+                <CustomMsg updateKey = 'customMsg'/>
+
+                <EmailField cssClass = 'honoree-email' updateKey = 'recipientEmailAddress'/>
        
                 </section>
             
             : null
 
             }
-            <div className='submit-stp-wrapper'>
+           { honoringUserChoices.honorForm === 'Donation in honor?' ? null :
+           
+              <div className='submit-stp-wrapper'>
 
-                <button type = 'submit' className = 'next-stp-btn submit-btn'> Submit </button>
-            </div>
+                    <button type = 'submit' className = 'next-stp-btn submit-btn'> Submit </button>
+                </div>
+            }
         </div>
     )
 }
 
 export default HonorForm;
-
-
-                //   <Dropdown  prefill = {userChoices.templateType} cssClass = 'long-dropdown' 
-                //   options = {['New donor', 'Recurring donor']} updateUserChoice = {updateUserChoice} updateStep = {updateStep} updateKey = 'templateType'/> 

@@ -103,4 +103,5 @@ input[type=date]::-webkit-calendar-picker-indicator {
   align-items: center;
   width: 300px;
   gap: 23px;
+  display: none;
 }

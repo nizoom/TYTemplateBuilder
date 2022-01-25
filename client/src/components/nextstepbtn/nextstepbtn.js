@@ -50,16 +50,19 @@ const NextStepBtn = (props) => {
     function handleNextStepClick (e){
         e.preventDefault();
         const blankFields = formValidation();
-        console.log(blankFields)
+        // console.log(blankFields)
        
         if(blankFields.length === 0 && props.page === 1 ){
+            //update step to honor form
              props.initNextPreviousForm(1)
+             props.updateStep(3)
         } if(blankFields.length > 0 && props.page === 1 ) {
             // alert user to required fields 
             props.reportIncompleteFields(blankFields)
         } if(props.page === 2 ){
             console.log('goingback')
             props.initNextPreviousForm(-1)
+            props.updateStep(2)
         }
     }
     return (

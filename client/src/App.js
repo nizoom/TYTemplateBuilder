@@ -41,9 +41,17 @@ function App() {
   const [stepStr, setStepStr] = useState('Step 1: Choose template type')
 
   function updateStep (update) {
-    if(update === 'form'){
-      setStepStr('Step 2: Fill out form')
-    } 
+    switch (update) {
+      case 2 : {
+          setStepStr('Step 2: Fill out donor form')
+          break;
+      }
+      case 3: {
+        setStepStr('Step 3: Fill out honoree form')
+        break;
+      }
+    }
+
   }
 
   //create state obj to track invalid inputs preventing next click 
@@ -121,14 +129,14 @@ function App() {
 
                   <PresentForm templateType = {userChoices.templateType} updateUserChoice = {updateUserChoice} userChoices = {userChoices} incompleteFields = {incompleteFields}/> </div>
 
-                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep}/> 
+                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices}/> 
 
                   }
 
 
             </div>
 
-                 {userChoices.templateType === 'Choose Template Type' ? null : <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields} initNextPreviousForm = {initNextPreviousForm} page = {formPage}/> }
+                 {userChoices.templateType === 'Choose Template Type' ? null : <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields} initNextPreviousForm = {initNextPreviousForm} page = {formPage} updateStep ={updateStep}/> }
         
           </form>
 
