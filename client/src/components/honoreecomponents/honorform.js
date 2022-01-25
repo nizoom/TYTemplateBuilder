@@ -3,7 +3,7 @@ import Dropdown from '../dropdowns/dropdowns'
 import '../nextstepbtn/nextstepbtn.css'
 import './honoree.css'
 import RenderNameComponent from '../inputfields/rendernamecomponent'
-
+import CustomMsg from './custommsg';
 
 const HonorForm = (props) => {
 
@@ -12,9 +12,11 @@ const HonorForm = (props) => {
 
     const [honoringUserChoices, setHonoringUserChoices] = useState({
             honorForm: 'Donation in honor?',
+            honoringOrMemory : 'in Honor or in Memory',
             honoreeName : '',
             recipientName : '',
-            honoreeEmailAddress : ''
+            honoreeEmailAddress : '',
+            customMsg: ''
     })
 
     function updateHonorUserChoice(choice){
@@ -31,23 +33,43 @@ const HonorForm = (props) => {
     // console.log(userChoices)
   } 
 
-  useEffect(() => {
-      console.log(honoringUserChoices)
-  }, [honoringUserChoices])
+  // useEffect(() => {
+  //     console.log(honoringUserChoices)
+  // }, [honoringUserChoices])
 
     
     return (
-        <div className='form-wrapper'>
-            <label className = 'template-field-name'> Honoring: </label>
-            <Dropdown prefill = {honoringUserChoices.honorForm} cssClass = 'long-dropdown'  options = {['Yes', 'No']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honorForm'/>
-            { honoringUserChoices.honorForm === 'Yes' ? 
-            
-            <div className='honoree-field-wrapper'> 
-              <RenderNameComponent updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form'/>
-            </div> : 
-            <div className='donation-amount-wrapper'>
-                Continue
+        <div className='honor-form-wrapper'>
+            <div className='honor-dropdwn-wrapper'>
+              <label className = 'template-field-name'> Honoring: </label>
+
+              <Dropdown prefill = {honoringUserChoices.honorForm} cssClass = 'long-dropdown'  options = {['Yes', 'No']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honorForm'/>
             </div>
+
+            { honoringUserChoices.honorForm === 'Yes' ? 
+
+
+               <form className='honoree-fields-wrapper'>
+
+                <div className='in-honor-memory-wrapper'>
+
+                  <label className = 'template-field-name' style = {{fontSize : 'medium'}}> Honoring/Memory: </label>
+
+                  <Dropdown prefill = {honoringUserChoices.honoringOrMemory} cssClass = 'long-dropdown'  options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honorForm'/>
+                
+                </div>                
+
+                            
+            
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form'/>            
+
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Recipient name:' cssClass = 'honoree-name-field' type = 'honor form'/>           
+          
+                <CustomMsg/>
+       
+                 </form>
+            
+            : null
 
             }
             <div className='submit-stp-wrapper'>
