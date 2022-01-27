@@ -90,8 +90,6 @@ const RenderNameComponent = (props) => {
             
         })
 
-        console.log(btnIndex)
-
         // console.log(names[btnIndex])
 
         setNames(newArr)
@@ -113,9 +111,9 @@ const RenderNameComponent = (props) => {
     const AddtionalNameFields = numberOfNewNames.map((newName, index) => {
     
         return  <div key = {index} className='additional-donor-field'>
-                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false}/>
+                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false} value = {getValue(index + 1 , 'donorFirstName')}/>
 
-                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false}/>
+                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false} value = {getValue(index + 1 , 'donorLastName')}/>
 
                     <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name' index = {index + 1}/>
                 </div>
@@ -124,15 +122,17 @@ const RenderNameComponent = (props) => {
     })
 
     function getValue(index, updateKey){
-    //    console.log(props.userChoices.donorNames)
+    //   the process to get donor form donor names vs props.value which provides the names related to the honor form
         if(props.userChoices !== undefined){
-            console.log('fired')
-            return(props.userChoices.donorNames.length < 1 ?  '' : props.userChoices.donorNames[index][updateKey])
-        }
-        
+            if(props.userChoices.donorNames[index] !== undefined) {
+                return(props.userChoices.donorNames.length < 1 ?  '' : props.userChoices.donorNames[index][updateKey])
+            } //else 
+      
+            return ''
+        }  
     }
 
-    console.log(props.value)
+
   
     return (
               <div>
@@ -145,9 +145,13 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields} value = {   props.value!== undefined ? props.value : getValue(0, 'donorFirstName')}/>
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields} 
+                    // this value prop forks the proces of receiving values for either the honor form (props.value) or donor form(getValue) 
+                    value = {   props.value!== undefined ? props.value[0] : getValue(0, 'donorFirstName')}/>
 
-                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false} />
+                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false} 
+
+                    value = {   props.value!== undefined ? props.value [1]: getValue(0, 'donorLastName')}/>
 
                 {props.type === 'donor form' ? <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0} /> : null}
 

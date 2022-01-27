@@ -11,7 +11,6 @@ const PresentForm = (props) => {
         }
 
        if(props.templateType === 'Honoring'){
-           console.log('honoring')
            return <HonorForm/>
        }
        // else

@@ -14,15 +14,15 @@ const HonorForm = (props) => {
     const [honoringUserChoices, setHonoringUserChoices] = useState({
             honorForm: 'Donation in honor?',
             honoringOrMemory : 'in Honor or in Memory',
-            honoreeName : [{}],
-            recipientName : [{}],
+            honoreeName : [],
+            recipientName : [],
             honoreeEmail : '',
             customMsg: ''
     })
 
     function updateHonorUserChoice(choice){
     
-    // console.log(Object.keys(choice))
+    // console.log(choice)
     const [keyName] = Object.keys(choice);
     const [valueName] = Object.values(choice)
     // console.log(`${keyName} : ${valueName}`)
@@ -41,12 +41,14 @@ const HonorForm = (props) => {
    function determineNamesValue(property, updateKey){
 
     if(property.length < 1){
-      console.log('nothing here')
+      // console.log('nothing here')
       return ''
     }
-    //else 
-    console.log('something has been entered')
-    return property[0][updateKey]
+    //these are not donornames but we are relying on these property names since they are provided by rendernamescomponenet 
+    const firstName = honoringUserChoices[updateKey][0].donorFirstName
+    const lastName = honoringUserChoices[updateKey][0].donorLastName
+
+    return [firstName, lastName]
 
    }
     return (
@@ -72,9 +74,9 @@ const HonorForm = (props) => {
 
                             
             
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form' userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}/>            
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honoreeName' userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}/>            
 
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'honor form' value = {determineNamesValue(honoringUserChoices.recipientName, 'recipientName')}/>           
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'recipientName' value = {determineNamesValue(honoringUserChoices.recipientName, 'recipientName')}/>           
           
                 <CustomMsg updateKey = 'customMsg' updateUserChoice = {updateHonorUserChoice}/>
 
