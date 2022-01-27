@@ -4,3 +4,7 @@
         grid-row: row 2;
         width: 570px;
 }
+
+.donor-email-wrapper{
+display: none;
+}

@@ -8,17 +8,13 @@ const StandardInputField = (props) => {
     // the values were saved in state when moving btw pages but the old answers wouldn't show in the fields if you moved back / forward
     //getSavedValue should fix that
 
-    const getSavedValue = () => {
-      console.log(props.userChoices)
+    //if state value is blank then use callback / ref / saved value : OTHERWISE use state value 
 
-
-
-      //if name type do this
-
-
-    }
+    //probably does need to be passed userChoices and then dynamically find based on updateKEY 
 
     const [value, setValue] = useState('')
+
+
 
     function handleChange(event){
 
@@ -45,7 +41,7 @@ const StandardInputField = (props) => {
       
     }
 
-
+    
   // useEffect(() => {
   //   console.log(value)
   // }, [value])
@@ -54,8 +50,8 @@ const StandardInputField = (props) => {
     return(
         <div className='input-field-position'> 
    
-            <input className={props.incompleteFields ?  'incomplete' : props.cssClass} placeholder={ props.incompleteFields ? props.prefill + ' required' : props.prefill} 
-            onChange={handleChange} value = {value} type = {props.type}/>
+            <input className={props.incompleteFields ?  'incomplete' : props.cssClass} placeholder= { props.incompleteFields ? props.prefill + ' required' : props.prefill} 
+            onChange={handleChange} value = {props.value} type = {props.type} />
 
           
         </div>
@@ -64,4 +60,3 @@ const StandardInputField = (props) => {
 
 export default StandardInputField;
 
-//   <input className={props.cssClass} > {props.prefill}</input>

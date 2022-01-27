@@ -4,12 +4,9 @@ import CurrencyInput from 'react-currency-input-field';
 
 const DonationAmount = (props) => {
 
-    const [dollar, setDollar] = useState('0')
+    const [dollar, setDollar] = useState(props.userChoices.donationAmount)
 
-    // function handleAmountChange(value, name){
-    //     console.log(value)
-    //     console.log(name)
-    // }
+    // console.log(props.userChoices.donationAmount)
 
     useEffect(() => {
        props.updateUserChoice({donationAmount: dollar})
@@ -18,7 +15,7 @@ const DonationAmount = (props) => {
     return (
         <div className='donation-amount-wrapper'>
             <label> Amount Given: </label>
-            <CurrencyInput   prefix='$' className= {props.incompleteFields ?  'incomplete' : 'short-input-field'} placeholder={props.incompleteFields  ? '$ required' :'$'} onValueChange={(value, name) => setDollar(value)}/> 
+            <CurrencyInput   prefix='$' className= {props.incompleteFields ?  'incomplete' : 'short-input-field'} placeholder={props.incompleteFields  ? '$ required' : `$ ${props.userChoices.donationAmount}`} onValueChange={(value, name) => setDollar(value)}/> 
         </div>
     )
 }
