@@ -124,17 +124,16 @@ const RenderNameComponent = (props) => {
     })
 
     function getValue(index, updateKey){
-    //has to be dynamic enough to get values from both the donation form state AND the honor form state
-    if(orops.userChoices.hasOwnProperty())
-    if(rootState ) // for donors
-       return(rootState.donorNames.length < 1 ?  '' : props.userChoices.donorNames[index][updateKey])
-    } else { // for honorers
-
+    //    console.log(props.userChoices.donorNames)
+        if(props.userChoices !== undefined){
+            console.log('fired')
+            return(props.userChoices.donorNames.length < 1 ?  '' : props.userChoices.donorNames[index][updateKey])
+        }
+        
     }
-    
+
+    console.log(props.value)
   
-    
-    
     return (
               <div>
 
@@ -146,7 +145,7 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields} value = {getValue(0, 'donorFirstName')}/>
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields} value = {   props.value!== undefined ? props.value : getValue(0, 'donorFirstName')}/>
 
                 <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false} />
 
@@ -172,3 +171,5 @@ const RenderAdditionalDonorNameFields = (props) => {
         return null
     }
 }
+
+// typeof(props.value) !== 'object'

@@ -14,9 +14,9 @@ const HonorForm = (props) => {
     const [honoringUserChoices, setHonoringUserChoices] = useState({
             honorForm: 'Donation in honor?',
             honoringOrMemory : 'in Honor or in Memory',
-            honoreeName : '',
-            recipientName : '',
-            recipientEmailAddress : '',
+            honoreeName : [{}],
+            recipientName : [{}],
+            honoreeEmail : '',
             customMsg: ''
     })
 
@@ -38,7 +38,17 @@ const HonorForm = (props) => {
       console.log(honoringUserChoices)
   }, [honoringUserChoices])
 
-    
+   function determineNamesValue(property, updateKey){
+
+    if(property.length < 1){
+      console.log('nothing here')
+      return ''
+    }
+    //else 
+    console.log('something has been entered')
+    return property[0][updateKey]
+
+   }
     return (
         <div className='honor-form-wrapper'>
             <div className='honor-dropdwn-wrapper'>
@@ -56,19 +66,19 @@ const HonorForm = (props) => {
 
                   <label className = 'template-field-name' style = {{fontSize : 'medium'}}> Honoring/Memory: </label>
 
-                  <Dropdown prefill = {honoringUserChoices.honoringOrMemory} cssClass = 'long-dropdown'  options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honorForm'/>
+                  <Dropdown prefill = {honoringUserChoices.honoringOrMemory} cssClass = 'long-dropdown'  options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honoringOrMemory'/>
                 
                 </div>                
 
                             
             
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form' userCoices = {honoringUserChoices}/>            
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honor form' userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}/>            
 
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'honor form'/>           
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'honor form' value = {determineNamesValue(honoringUserChoices.recipientName, 'recipientName')}/>           
           
-                <CustomMsg updateKey = 'customMsg'/>
+                <CustomMsg updateKey = 'customMsg' updateUserChoice = {updateHonorUserChoice}/>
 
-                <EmailField cssClass = 'honoree-email' updateKey = 'recipientEmailAddress'/>
+                <EmailField cssClass = 'honoree-email' updateKey = 'recipientEmailAddress' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice}/>
        
                 </section>
             
