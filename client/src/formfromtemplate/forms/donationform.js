@@ -20,7 +20,7 @@ const DonationForm = (props) => {
 
              <DonationDate updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.donationDate} userChoices = {props.userChoices}/>
 
-            <EmailField updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.recipientEmail} userChoices = {props.userChoices} value = {props.userChoices.recipientEmail}/>
+            <EmailField updateUserChoice = {props.updateUserChoice} incompleteFields = {props.incompleteFields.recipientEmail} userChoices = {props.userChoices} value = {props.userChoices.recipientEmail} updateKey = 'recipientEmail'/>
 
             <TaxParaDropdown updateUserChoice = {props.updateUserChoice} userChoices = {props.userChoices} userChoices = {props.userChoices}/>
 

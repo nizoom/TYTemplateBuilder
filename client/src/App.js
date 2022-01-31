@@ -4,7 +4,7 @@ import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
 import NextStepBtn from './components/nextstepbtn/nextstepbtn'
 
-import React, {useState, useEffect} from 'react'
+import React, {useState, useEffect, useRef} from 'react'
 
 function App() {
 
@@ -82,7 +82,7 @@ function App() {
   } 
 
 
-  const [formPage, setFormPage] = useState(1)
+  const [formPage, setFormPage] = useState(2)
 
   function initNextPreviousForm (direction){
 
@@ -101,6 +101,16 @@ function App() {
   // useEffect(() => {
   //   console.log(userChoices)
   // }, [userChoices])
+
+  const [honorState, setHonorState] = useState('')
+  
+  const getHonorState = (state) => {
+
+    if(state!== undefined){
+      setHonorState(state)
+    }
+  }
+
 
 
 
@@ -129,7 +139,7 @@ function App() {
 
                   <PresentForm templateType = {userChoices.templateType} updateUserChoice = {updateUserChoice} userChoices = {userChoices} incompleteFields = {incompleteFields}/> </div>
 
-                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices}/> 
+                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices} getHonorState = {getHonorState}/> 
 
                   }
 
@@ -140,7 +150,7 @@ function App() {
         
           </form>
 
-        <Visualizer userChoices = {userChoices}/>
+        <Visualizer userChoices = {userChoices} formPage = {formPage} honorState = {honorState} />
 
 
       </div>

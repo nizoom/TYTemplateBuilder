@@ -90,3 +90,19 @@
     padding: 2px;
     
 }
+
+.storycloth-wrapper{
+    border: 2px solid #F5AE44;
+    height: 100px;
+    width: 110px;
+    margin: auto auto 20px auto;
+    background-color: #3B5A67;
+    text-align: center;
+    color: #E5EBEB
+
+}
+
+.storycloth{
+    margin-top: 40%;
+    font-size: x-small;
+}

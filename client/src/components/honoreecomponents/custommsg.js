@@ -6,8 +6,13 @@ const CustomMsg = (props) => {
 
     function handleChange(e){
         const input = e.target.value;
+
         setMsgValue(input)
 
+        let key = props.updateKey
+
+
+         props.updateUserChoice({[key] : input})
     }
 
     return (

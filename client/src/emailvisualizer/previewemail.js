@@ -1,4 +1,4 @@
-import React, {useRef, useEffect} from 'react';
+import React from 'react';
 import ThisIsWhatYouMakePossible from './thisiswhatyoumakepossible';
 
 
@@ -16,7 +16,7 @@ const IntroSentence = (props) => {
             mission and appreciate your generous contribution. Your gift provides hope for survivors of sexual violence. </span> : 
             
             <span> Thank you for continuing to be such a devoted supporter of Common Threads Project. 
-            With a gift of <span className = 'dynamic-text'> ${emailData.donationAmount} </span>on <span className = 'dynamic-text'> {emailData.donationDate} </span> you’re providing hope for survivors of sexual violence. </span> 
+            With a gift of <span className = 'dynamic-text'> ${emailData.donationAmount} </span> on <span className = 'dynamic-text'> {emailData.donationDate} </span> you’re providing hope for survivors of sexual violence. </span> 
             
             }
         </span>

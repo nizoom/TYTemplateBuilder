@@ -1,5 +1,6 @@
 import React from 'react';
 import EmailPreview from './previewemail';
+import HonorEmailPreview from './honoremailpreview';
 
 
 const PresentPreview = (props) => {
@@ -7,13 +8,16 @@ const PresentPreview = (props) => {
 
     const templateType = props.userChoices.templateType
 
+    if(props.formPage === 2){
+        return  <HonorEmailPreview honorState = {props.honorState} donorState = {props.userChoices}/>
+    }
+
     if(templateType === 'New donor'){
         return <EmailPreview  emailData = {props.userChoices}/>
 
     }
 
     if(templateType === 'Recurring donor'){
-        console.log(props.userChoices.donationDate)
         return <EmailPreview  emailData = {props.userChoices}/>
         
         // {`Thank you for continuing to be such a devoted supporter of Common Threads Project. 
@@ -21,11 +25,6 @@ const PresentPreview = (props) => {
         
      
     }
-
-   if(templateType === 'Honoring'){
-       console.log('honoring')
-    //    return <HonorForm/>
-   }
     //else
    return null
 

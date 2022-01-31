@@ -11,7 +11,7 @@ const PresentForm = (props) => {
         }
 
        if(props.templateType === 'Honoring'){
-           return <HonorForm/>
+           return <HonorForm getHonorState = {props.getHonorState}/>
        }
        // else
 

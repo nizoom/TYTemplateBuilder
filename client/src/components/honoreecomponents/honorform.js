@@ -21,8 +21,7 @@ const HonorForm = (props) => {
     })
 
     function updateHonorUserChoice(choice){
-    
-    // console.log(choice)
+
     const [keyName] = Object.keys(choice);
     const [valueName] = Object.values(choice)
     // console.log(`${keyName} : ${valueName}`)
@@ -31,12 +30,15 @@ const HonorForm = (props) => {
       [keyName] : valueName
     })
 
+    
     // console.log(userChoices)
   } 
 
   useEffect(() => {
-      console.log(honoringUserChoices)
+    props.getHonorState(honoringUserChoices)
   }, [honoringUserChoices])
+
+  // console.log(honoringUserChoices.honoreeEmail)
 
    function determineNamesValue(property, updateKey){
 
@@ -71,8 +73,6 @@ const HonorForm = (props) => {
                   <Dropdown prefill = {honoringUserChoices.honoringOrMemory} cssClass = 'long-dropdown'  options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honoringOrMemory'/>
                 
                 </div>                
-
-                            
             
                 <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honoreeName' userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}/>            
 
@@ -80,7 +80,7 @@ const HonorForm = (props) => {
           
                 <CustomMsg updateKey = 'customMsg' updateUserChoice = {updateHonorUserChoice}/>
 
-                <EmailField cssClass = 'honoree-email' updateKey = 'recipientEmailAddress' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice}/>
+                <EmailField cssClass = 'honoree-email' updateKey = 'honoreeEmail' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice}/>
        
                 </section>
             
