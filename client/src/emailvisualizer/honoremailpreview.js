@@ -38,11 +38,13 @@ const HonorEmailPreview = (props) => {
         // console.log(emailData)
         const strState = emailData.honoringOrMemory;
         const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
-        const recipient = determineRecipientNameState();
+        const recipient = determineRecipientNameState(emailData);
 
-        console.log(strState)
+        // console.log(honoree)
+        // console.log(recipient)
         if(strState !== 'in Honor or in Memory'){
             if(strState === 'In memory of'){
+                console.log('memory')
                 return `memory of ${honoree}`
             }
             if(strState === 'In honor of'){
@@ -53,13 +55,30 @@ const HonorEmailPreview = (props) => {
                     return `honor of ${honoree}.`
                 }
             }     
+           
         } else {
-            return 'in honor / memory of honoree'
+            return 'in honor / in memory of honoree'
         }
     }
 
     const determineAdressingStyle = (emailData) => {
+        const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
+        const recipient = determineRecipientNameState(emailData);
+        
+        console.log(honoree)
+        console.log(recipient)
 
+        if(honoree !== 'honoree' || recipient !== 'Recipient'){ //default state
+            const sameHonoreeAndRecipient = honoree === recipient ? true : false 
+            if(honoree === recipient){
+                return 'honor you'
+            } if (honoree !== 'honoree' && recipient !== 'Recipient' && !sameHonoreeAndRecipient){
+                return 'honor them'
+            }
+            
+        } 
+            console.log('default')
+            return 'honor you / them '
     }
 
     return (
@@ -79,13 +98,15 @@ const HonorEmailPreview = (props) => {
              This note is to let you know that <span className='dynamic-text'> {determineDonorNameState(donorName)} </span> has made a 
              very generous donation to Common Threads Project in 
              <span className='dynamic-text'> {determineMemoryOrHonorStr(emailData)} </span>. 
-             We are deeply grateful that they chose to HONOR YOU/ THEM in this way. We join <span className='dynamic-text'> {determineDonorNameState(donorName)} </span> in wishing you all the best.
+             We are deeply grateful that they chose to <span className='dynamic-text'> {determineAdressingStyle(emailData)}</span>in this way. 
+             
+             We join <span className='dynamic-text'> {determineDonorNameState(donorName)} </span> in wishing you all the best.
              </p>
 
 
              <p className='main-copy'><em> Thank you for all your great work!</em> </p>
 
-             <p> CUSTOM MESSAGE HERE</p>
+             <p className='main-copy'> {emailData.customMsg === '' ? <span className='dynamic-text'> Custom message </span> : <em>{emailData.customMsg} </em>}</p>
 
              <p className='main-copy'> Signature / Address</p> 
              
