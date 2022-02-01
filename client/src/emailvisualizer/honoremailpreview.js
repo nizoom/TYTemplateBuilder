@@ -23,15 +23,28 @@ const HonorEmailPreview = (props) => {
        
     }
 
-    const donorName = props.donorState.donorNames[0];
+    const donorNames = props.donorState.donorNames
 
     
 
-    const determineDonorNameState = () => {
-       
-    //    return `${donorName.donorFirstName}  ${donorName.donorLastName}`
+    const determineDonorNameState = (donorNames) => {
+        if(donorNames.length < 2){
+            return `${donorNames[0].donorFirstName}  ${donorNames[0].donorLastName}`
+        }
 
-       return 'Nissim'
+        let namesStr = ''
+
+        donorNames.forEach((nameObj, index) => {
+            if(index !== donorNames.length - 1){ //if this isn't the last person in the list then add the 'and'
+                namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName} and `
+            } else {
+                namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName}`
+            }
+            
+        })
+
+        return namesStr;
+       
     }
 
     const determineMemoryOrHonorStr = (emailData) => {
@@ -40,8 +53,7 @@ const HonorEmailPreview = (props) => {
         const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
         const recipient = determineRecipientNameState(emailData);
 
-        // console.log(honoree)
-        // console.log(recipient)
+  
         if(strState !== 'in Honor or in Memory'){
             if(strState === 'In memory of'){
                 console.log('memory')
@@ -65,8 +77,8 @@ const HonorEmailPreview = (props) => {
         const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
         const recipient = determineRecipientNameState(emailData);
         
-        console.log(honoree)
-        console.log(recipient)
+        // console.log(honoree)
+        // console.log(recipient)
 
         if(honoree !== 'honoree' || recipient !== 'Recipient'){ //default state
             const sameHonoreeAndRecipient = honoree === recipient ? true : false 
@@ -77,7 +89,7 @@ const HonorEmailPreview = (props) => {
             }
             
         } 
-            console.log('default')
+            // console.log('default')
             return 'honor you / them '
     }
 
@@ -95,12 +107,12 @@ const HonorEmailPreview = (props) => {
           
 
              <p className='main-copy'>
-             This note is to let you know that <span className='dynamic-text'> {determineDonorNameState(donorName)} </span> has made a 
+             This note is to let you know that <span className='dynamic-text'> {determineDonorNameState(donorNames)} </span> has made a 
              very generous donation to Common Threads Project in 
              <span className='dynamic-text'> {determineMemoryOrHonorStr(emailData)} </span>. 
              We are deeply grateful that they chose to <span className='dynamic-text'> {determineAdressingStyle(emailData)}</span>in this way. 
              
-             We join <span className='dynamic-text'> {determineDonorNameState(donorName)} </span> in wishing you all the best.
+             We join <span className='dynamic-text'> {determineDonorNameState(donorNames)} </span> in wishing you all the best.
              </p>
 
 

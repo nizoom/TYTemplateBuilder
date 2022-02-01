@@ -82,7 +82,7 @@ function App() {
   } 
 
 
-  const [formPage, setFormPage] = useState(2)
+  const [formPage, setFormPage] = useState(1)
 
   function initNextPreviousForm (direction){
 
