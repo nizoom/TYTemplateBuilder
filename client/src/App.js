@@ -105,7 +105,6 @@ function App() {
   const [honorState, setHonorState] = useState('')
   
   const getHonorState = (state) => {
-
     if(state!== undefined){
       setHonorState(state)
     }
@@ -146,7 +145,8 @@ function App() {
 
             </div>
 
-                 {userChoices.templateType === 'Choose Template Type' ? null : <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields} initNextPreviousForm = {initNextPreviousForm} page = {formPage} updateStep ={updateStep}/> }
+                 {userChoices.templateType === 'Choose Template Type' ? null : 
+                 <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields} initNextPreviousForm = {initNextPreviousForm} page = {formPage} updateStep ={updateStep}/> }
         
           </form>
 
