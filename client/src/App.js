@@ -64,27 +64,13 @@ function App() {
   })
 
   function reportIncompleteFields(fields){
-
-    const newValidationState = {...incompleteFields}
-
-    for(const property in newValidationState){
-      //property is key and newValidationState[property] is value
-
-        //if a field in the list of invalid fields is there then mark that field as truly invalid in the newValidationState obj
-        if(fields.includes(property)){
-          newValidationState[property] = true;
-        } else {  //if property is not included in fields arr then mark as false / complete
-          newValidationState[property] = false
-        }
-    }
-
-    setIncompleteFields(newValidationState)
+    // setIncompleteFields(fields)
   } 
 
 
   const [formPage, setFormPage] = useState(1)
 
-  function initNextPreviousForm (direction){
+  function goTotNextPreviousForm (direction){
 
     // direction is + 1 or - 1
     if(direction > 0) {
@@ -146,7 +132,8 @@ function App() {
             </div>
 
                  {userChoices.templateType === 'Choose Template Type' ? null : 
-                 <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields} initNextPreviousForm = {initNextPreviousForm} page = {formPage} updateStep ={updateStep}/> }
+
+                 <NextStepBtn userChoices = {userChoices} reportIncompleteFields = {reportIncompleteFields} goTotNextPreviousForm = {goTotNextPreviousForm} page = {formPage} updateStep ={updateStep}/> }
         
           </form>
 

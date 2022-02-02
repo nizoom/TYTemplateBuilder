@@ -9,7 +9,17 @@ const NextStepBtn = (props) => {
     function submitForValidation(e){
         e.preventDefault();
        
-        const validationErrors = props.page === 1 ? donationFormValidation(props.userChoices) : honorFormValidation();
+        const validationStatus = props.page === 1 ? donationFormValidation(props.userChoices) : honorFormValidation();
+
+        //if validation status reports no issues then go to the next page 
+        //  else report the issues
+        console.log(validationStatus);
+
+        if(validationStatus === 'go to next page'){
+            // props.goTotNextPreviousForm(1)
+        } else {
+            props.reportIncompleteFields(validationStatus)
+        }
     }
 
     return (

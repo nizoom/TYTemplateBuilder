@@ -2,13 +2,12 @@ import moment from 'moment'
 
 export function donationFormValidation(state){
     //do the below for both state types (honor and donation)
-    console.log(state)
    
     // create shallow copy of state 
     let shallowCopyOfState = {...state}
 
-    let invalidFields = [];
-
+    let validityTracker = [];
+    
     // delete properties that are uneeded 
 
     delete shallowCopyOfState.taxParagraph
@@ -16,7 +15,9 @@ export function donationFormValidation(state){
 
     // donation amount must be greater than zero 
     if(shallowCopyOfState.donationAmount < 1){
-        invalidFields.push('donationAmount')
+        validityTracker.push({donationAmount : 'invalid'})
+    } else {
+        validityTracker.push({donationAmount : 'valid'})
     }
 
     // donation date must be in the right format and be btw 1990 and 2025 (arbitrary years)
@@ -25,8 +26,12 @@ export function donationFormValidation(state){
 
     if(moment(momentifiedDate._i, "YYYY-MM-DD").isValid()){
         if(moment(momentifiedDate._i).isBefore('1990-01-01') && moment(momentifiedDate._i).isAfter('2025-01-01')){
-            invalidFields.push('donationDate')
+            validityTracker.push({donationDate : 'invalid'})
+        } else {
+            validityTracker.push({donationDate : 'valid'})
         }
+    } else { // if left blank
+        validityTracker.push({donationDate : 'invalid'})
     }
 
     // email must be valid email format with @ and .com/net research
@@ -37,8 +42,10 @@ export function donationFormValidation(state){
 
 
     if(!validateEmail(shallowCopyOfState.recipientEmail)){
-        invalidFields.push('recipientEmail')
-    }
+        validityTracker.push({recipientEmail : 'invalid'})
+    } else {
+        validityTracker.push({recipientEmail : 'valid'})
+    }   
 
   
    //get array of name validation and see if any elements are invalid 
@@ -48,14 +55,13 @@ export function donationFormValidation(state){
 
    //a return of undefined from the find method means that the element being filtered for was not found
 
-   if(invalidNameTrigger !== undefined ) { invalidFields.push(testedNames) };
+   if(invalidNameTrigger !== undefined ) { validityTracker.push({namesStatus : testedNames}) } else { validityTracker.push({namesStatus : 'valid'})  };
 
    function validateDonorNames(namesArr){
          // for names both first name and last name must be filled out for the name to be valid
         let namesValidityTracker = []
         if(namesArr.length < 1){
-            namesValidityTracker[0].donorFirstName = false
-            namesValidityTracker[0].donorLastName = false
+            namesValidityTracker.push({donorFirstName : false}, {donorLastName : false})
         } else {
             namesArr.forEach(nameObj => {
                 const index = namesArr.indexOf(nameObj)
@@ -88,22 +94,41 @@ export function donationFormValidation(state){
     }
     
     function checkIfBlank (nameProperty){
-     return( nameProperty === undefined || nameProperty === '' ? false : true )
+        return( nameProperty === undefined || nameProperty === '' ? false : true )
     }
 
 
- 
 
-    // return a list of the fields that have issues to the files where the root states are held, then have them display valid entry required or a red X tool tip
+    let x = true;
+    
+    //if the values of all objects is valid then return signal to go to next page  - else return object reporting invalid statuses
 
-    // if arr is empty then green light to go to next page / submit  
+
+    validityTracker.forEach(fieldObj => {
+        const fieldValidityStatus = Object.values(fieldObj)[0]
+        fieldValidityStatus !== 'valid' ? x = false : x = true 
+    })
 
 
-  
+    if(x){
+        return 'go to next page'
+    } 
+    //if any values are invalid then return validity tracker 
+
+    return validityTracker
 
 }
+
 
 
 export function honorFormValidation(state){
+    console.log(state)
+   
+    // create shallow copy of state 
+    let shallowCopyOfState = {...state}
+
+    let validityTracker = [];
 
 }
+
+
