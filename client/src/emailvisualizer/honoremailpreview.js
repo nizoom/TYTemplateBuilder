@@ -28,22 +28,24 @@ const HonorEmailPreview = (props) => {
     
 
     const determineDonorNameState = (donorNames) => {
-        if(donorNames.length < 2){
-            return `${donorNames[0].donorFirstName}  ${donorNames[0].donorLastName}`
-        }
+        // if(donorNames.length < 2){
+        //     return `${donorNames[0].donorFirstName}  ${donorNames[0].donorLastName}`
+        // }
 
-        let namesStr = ''
+        // let namesStr = ''
 
-        donorNames.forEach((nameObj, index) => {
-            if(index !== donorNames.length - 1){ //if this isn't the last person in the list then add the 'and'
-                namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName} and `
-            } else {
-                namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName}`
-            }
+        // donorNames.forEach((nameObj, index) => {
+        //     if(index !== donorNames.length - 1){ //if this isn't the last person in the list then add the 'and'
+        //         namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName} and `
+        //     } else {
+        //         namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName}`
+        //     }
             
-        })
+        // })
 
-        return namesStr;
+        // return namesStr;
+
+        return 'Nissim'
        
     }
 
@@ -60,7 +62,7 @@ const HonorEmailPreview = (props) => {
                 return `memory of ${honoree}`
             }
             if(strState === 'In honor of'){
-                console.log('honor')
+       
                 if (honoree === recipient ){ // most likely scenario
                    return 'honor you in this way'
                 } else {
@@ -82,6 +84,7 @@ const HonorEmailPreview = (props) => {
 
         if(honoree !== 'honoree' || recipient !== 'Recipient'){ //default state
             const sameHonoreeAndRecipient = honoree === recipient ? true : false 
+
             if(honoree === recipient){
                 return 'honor you'
             } if (honoree !== 'honoree' && recipient !== 'Recipient' && !sameHonoreeAndRecipient){

@@ -68,7 +68,7 @@ function App() {
   } 
 
 
-  const [formPage, setFormPage] = useState(1)
+  const [formPage, setFormPage] = useState(2)
 
   function goTotNextPreviousForm (direction){
 

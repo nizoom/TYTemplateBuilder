@@ -36,9 +36,6 @@ export function donationFormValidation(state){
 
     // email must be valid email format with @ and .com/net research
 
-    function validateEmail(email){
-        return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
-    }
 
 
     if(!validateEmail(shallowCopyOfState.recipientEmail)){
@@ -99,18 +96,14 @@ export function donationFormValidation(state){
 
 
 
-    let x = true;
+    // let x = true;
     
+
+
+    const validityResults = determineResultsOfValidityTracker(validityTracker) 
+
     //if the values of all objects is valid then return signal to go to next page  - else return object reporting invalid statuses
-
-
-    validityTracker.forEach(fieldObj => {
-        const fieldValidityStatus = Object.values(fieldObj)[0]
-        fieldValidityStatus !== 'valid' ? x = false : x = true 
-    })
-
-
-    if(x){
+    if(validityResults === undefined){
         return 'go to next page'
     } 
     //if any values are invalid then return validity tracker 
@@ -119,16 +112,103 @@ export function donationFormValidation(state){
 
 }
 
+function validateEmail(email){
+    return /^(([^<>()\[\]\.,;:\s@\"]+(\.[^<>()\[\]\.,;:\s@\"]+)*)|(\".+\"))@(([^<>()\.,;\s@\"]+\.{0,1})+([^<>()\.,;:\s@\"]{2,}|[\d\.]+))$/.test(email);
+}
 
+function determineResultsOfValidityTracker(validityTracker){
+
+    //checks to see if any validity objs  in the validity tracker are invalid 
+    const validityTrackerValues = validityTracker.map(validityObj => {
+        const value = Object.values(validityObj)[0];
+        return value;
+    })
+
+    const result = validityTrackerValues.find(element => element !== 'valid')
+    
+    return result
+}
 
 export function honorFormValidation(state){
-    console.log(state)
+   
    
     // create shallow copy of state 
     let shallowCopyOfState = {...state}
 
+    delete shallowCopyOfState.customMsg;
+    delete shallowCopyOfState.honorForm;
+
+    // console.log(shallowCopyOfState)
+
     let validityTracker = [];
 
+
+    //email validation 
+
+  
+    
+    if(!validateEmail(shallowCopyOfState.honoreeEmail)){
+        validityTracker.push({honoreeEmail : 'invalid'})
+    } else {
+        validityTracker.push({honoreeEmail : 'valid'})
+    }   
+
+    //in honor or memeory choice validation 
+
+    if(shallowCopyOfState.honoringOrMemory === "in Honor or in Memory"){ //hasn't been chosen yet
+        validityTracker.push({honoringOrMemory : 'invalid'})
+    } else {
+        validityTracker.push({honoringOrMemory : 'valid'})
+    }
+
+    //recipient name validation
+    const recipientNameObj = shallowCopyOfState.recipientName[0];
+
+    if(recipientNameObj.donorFirstName === '' || recipientNameObj.donorLastName === ''){
+        //if either are blank then return an object indicating the invalid name fields
+        const recipientFirstNameStatus = recipientNameObj.donorFirstName === '' ? false : true ;
+        const recipientLasttNameStatus = recipientFirstNameStatus === true ? false : true ;
+        validityTracker.push({recipientName : {
+            recipientFirstName : recipientFirstNameStatus,
+            recipientLasttName : recipientLasttNameStatus
+        }})
+    } else {
+        validityTracker.push({recipientName : 'valid'})
+    }
+
+    //honoree name validation 
+
+    if(shallowCopyOfState.honoreeName.length < 1){
+        validityTracker.push({ honoreeName : 'invalid '})
+    } else {
+        const honoreeNameObj = shallowCopyOfState.honoreeName[0]
+        if(honoreeNameObj.donorFirstName === '' || honoreeNameObj.donorLastName === ''){
+            //if either are blank then return an object indicating the invalid name fields
+            const honoreeFirstNameStatus = honoreeNameObj.donorFirstName === '' ? false : true ;
+            const honoreeLasttNameStatus = honoreeFirstNameStatus === true ? false : true ;
+            validityTracker.push({ honoreeName : {
+                honoreeFirstName : honoreeFirstNameStatus,
+                honoreeLasttNameStatus : honoreeLasttNameStatus
+            }})
+        } else {
+            validityTracker.push({honoreeName : 'valid'})
+        }
+    }
+
+    const validityResults = determineResultsOfValidityTracker(validityTracker) 
+
+    //if the values of all objects is valid then return signal to go to next page  - else return object reporting invalid statuses
+    if(validityResults === undefined){
+        return 'submit'
+    } 
+    //if any values are invalid then return validity tracker 
+
+    // console.log(validityTracker)
+
+    return validityTracker
+
+     
+    
 }
 
 

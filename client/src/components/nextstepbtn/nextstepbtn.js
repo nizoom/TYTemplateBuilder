@@ -13,10 +13,10 @@ const NextStepBtn = (props) => {
 
         //if validation status reports no issues then go to the next page 
         //  else report the issues
-        console.log(validationStatus);
+    
 
         if(validationStatus === 'go to next page'){
-            // props.goTotNextPreviousForm(1)
+            props.goTotNextPreviousForm(1)
         } else {
             props.reportIncompleteFields(validationStatus)
         }

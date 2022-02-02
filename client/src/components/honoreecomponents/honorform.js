@@ -5,6 +5,7 @@ import './honoree.css'
 import RenderNameComponent from '../inputfields/rendernamecomponent'
 import CustomMsg from './custommsg';
 import EmailField from '../inputfields/emailfield';
+import { honorFormValidation } from '../../validation';
 
 const HonorForm = (props) => {
 
@@ -53,6 +54,20 @@ const HonorForm = (props) => {
     return [firstName, lastName]
 
    }
+
+   function handleSubmit(e){
+     e.preventDefault();
+
+     if(honoringUserChoices.honorForm !== 'No'){
+       const validationStatus = honorFormValidation(honoringUserChoices)
+       console.log(validationStatus)
+     } else {
+      console.log('submitting');
+     }
+     
+   }
+
+   
     return (
         <div className='honor-form-wrapper'>
             <div className='honor-dropdwn-wrapper'>
@@ -91,7 +106,7 @@ const HonorForm = (props) => {
            
               <div className='submit-stp-wrapper'>
 
-                    <button type = 'submit' className = 'next-stp-btn submit-btn'> Submit </button>
+                    <button type = 'submit' className = 'next-stp-btn submit-btn' onClick = {handleSubmit}> Submit </button>
                 </div>
             }
         </div>
