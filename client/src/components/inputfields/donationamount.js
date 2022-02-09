@@ -12,10 +12,13 @@ const DonationAmount = (props) => {
        props.updateUserChoice({donationAmount: dollar})
     },[dollar])
 
+    // console.log(props.fieldValidity)
+
     return (
         <div className='donation-amount-wrapper'>
             <label> Amount Given: </label>
-            <CurrencyInput   prefix='$' className= {props.incompleteFields ?  'incomplete' : 'short-input-field'} placeholder={props.incompleteFields  ? '$ required' : `$ ${props.userChoices.donationAmount}`} onValueChange={(value, name) => setDollar(value)}/> 
+            <CurrencyInput   prefix='$' className= {props.fieldValidity === 'invalid' ?  'incomplete' : 'short-input-field'} 
+            placeholder={props.incompleteFields  ? '$ required' : `$ ${props.userChoices.donationAmount}`} onValueChange={(value, name) => setDollar(value)}/> 
         </div>
     )
 }

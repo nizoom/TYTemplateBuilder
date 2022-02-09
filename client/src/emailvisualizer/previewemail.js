@@ -35,8 +35,6 @@ const DearDonorStr = (props) => {
 
         const allNames = emailData.donorNames;
 
-        
-
         const firstNames = allNames.map(obj => {
                const firstName = checkForUndefinedFirstName( obj.donorFirstName );
                return firstName

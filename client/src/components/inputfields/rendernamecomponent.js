@@ -108,14 +108,18 @@ const RenderNameComponent = (props) => {
 
 
 
-    const AddtionalNameFields = numberOfNewNames.map((newName, index) => {
+    const AddtionalNameFields = numberOfNewNames.map((index) => {
     
         return  <div key = {index} className='additional-donor-field'>
-                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false} value = {getValue(index + 1 , 'donorFirstName')}/>
+                    <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateKey = 'donorFirstName' updateNames = {updateNames} type = "name" index = {index} incompleteFields = {false} value = {getValue(index, 'donorFirstName')}
+                    incompleteFields = {getNameValidityStatus(index, 'donorFirstName')}
+                    />
 
-                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index + 1} incompleteFields = {false} value = {getValue(index + 1 , 'donorLastName')}/>
+                    <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateKey = 'donorLastName' updateNames = {updateNames} type = "name" index = {index} incompleteFields = {false} value = {getValue(index, 'donorLastName')} 
+                    incompleteFields = {getNameValidityStatus(index, 'donorLastName')}
+                    />
 
-                    <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name' index = {index + 1}/>
+                    <AddDonorBtn changeNumberOfNameFields = {deleteNewDonorName} operation = '-' tooltipMsg = 'Remove this donor name' index = {index}/>
                 </div>
 
 
@@ -132,8 +136,45 @@ const RenderNameComponent = (props) => {
         }  
     }
 
+    
 
-  
+    //
+        function getNameValidityStatus(nameFieldIndex, name){
+            console.log(props.fieldValidity);
+            console.log(nameFieldIndex);
+            const fieldValidity = props.fieldValidity
+         
+          //if all name fields are valid
+            if(fieldValidity === 'valid'){
+                return 'valid'
+            } else { 
+                if(!fieldValidity){ //nothing has been entered
+                    return null;
+                }
+                // there are issues
+
+                    //if nameFieldIndex is greater than fieldValidity.length then return 'valid' bc it means the user hasn't entered anything yet on those new fields 
+
+                    if(fieldValidity.length - 1  < nameFieldIndex){
+                        return 'invalid'
+                    }
+
+                    if(fieldValidity[nameFieldIndex][name]){
+                        return 'valid'
+                    }  if(fieldValidity[nameFieldIndex] === true ){
+                        return 'valid'
+                    }
+                    
+                
+                else {
+                    return 'invalid'
+                } 
+               
+
+            }
+
+    }
+ 
     return (
               <div>
 
@@ -145,13 +186,18 @@ const RenderNameComponent = (props) => {
         
             
 
-                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} incompleteFields = {props.incompleteFields} 
+                <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} 
+                
+                    incompleteFields = {getNameValidityStatus(0, 'donorFirstName')} 
                     // this value prop forks the proces of receiving values for either the honor form (props.value) or donor form(getValue) 
                     value = {   props.value!== undefined ? props.value[0] : getValue(0, 'donorFirstName')}/>
 
-                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {false} 
+                <StandardInputField cssClass = 'short-input-field last-name' prefill = 'Last name' updateNames = {updateNames} updateKey = 'donorLastName' type = "name" index = {0} incompleteFields = {''}
 
-                    value = {   props.value!== undefined ? props.value [1]: getValue(0, 'donorLastName')}/>
+                    value = {   props.value!== undefined ? props.value [1]: getValue(0, 'donorLastName')} 
+                    
+                    incompleteFields = {getNameValidityStatus(0, 'donorLastName')}
+                    />
 
                 {props.type === 'donor form' ? <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0} /> : null}
 

@@ -6,7 +6,6 @@ const Visualizer = (props) => {
 
 
     
-
     return (
         <section className='msg-wrapper'>
             <div className='inner-content'>   

@@ -25,10 +25,13 @@ export function donationFormValidation(state){
     const momentifiedDate = moment(shallowCopyOfState.donationDate, "YYYY-MM-DD")
 
     if(moment(momentifiedDate._i, "YYYY-MM-DD").isValid()){
-        if(moment(momentifiedDate._i).isBefore('1990-01-01') && moment(momentifiedDate._i).isAfter('2025-01-01')){
+
+        if(moment(momentifiedDate._i).isBefore('1990-01-01') || moment(momentifiedDate._i).isAfter('2025-01-01')){
             validityTracker.push({donationDate : 'invalid'})
+            
         } else {
             validityTracker.push({donationDate : 'valid'})
+   
         }
     } else { // if left blank
         validityTracker.push({donationDate : 'invalid'})

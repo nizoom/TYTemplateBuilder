@@ -56,19 +56,15 @@ function App() {
 
   //create state obj to track invalid inputs preventing next click 
 
-  const [incompleteFields, setIncompleteFields] = useState({
-      donationAmount: false,
-      donationDate : false,
-      recipientEmail : false,
-      donorNames : false 
-  })
+  const [incompleteFields, setIncompleteFields] = useState(false)
 
   function reportIncompleteFields(fields){
-    // setIncompleteFields(fields)
+    // console.log(fields);
+    setIncompleteFields(fields)
   } 
 
 
-  const [formPage, setFormPage] = useState(2)
+  const [formPage, setFormPage] = useState(1)
 
   function goTotNextPreviousForm (direction){
 

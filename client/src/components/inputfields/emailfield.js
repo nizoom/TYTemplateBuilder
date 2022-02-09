@@ -14,7 +14,8 @@ const EmailField = (props) => {
         <div className={determineClass()} style = {{display: 'flex', marginTop: '30px', gap: '22px'}}> 
             <label> Recipient Email: </label>
 
-            <StandardInputField type = 'email' cssClass = 'short-input-field' prefill='@' updateKey = {props.updateKey} updateUserChoice = {props.updateUserChoice} value = {props.value} incompleteFields = {props.incompleteFields}/>
+            <StandardInputField type = 'email' cssClass = 'short-input-field' prefill='@' updateKey = {props.updateKey} updateUserChoice = {props.updateUserChoice} 
+            value = {props.value} incompleteFields = {props.fieldValidity}/>
 
         </div>
     )
