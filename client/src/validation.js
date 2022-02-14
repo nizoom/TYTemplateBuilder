@@ -169,11 +169,12 @@ export function honorFormValidation(state){
 
     if(recipientNameObj.donorFirstName === '' || recipientNameObj.donorLastName === ''){
         //if either are blank then return an object indicating the invalid name fields
+      
         const recipientFirstNameStatus = recipientNameObj.donorFirstName === '' ? false : true ;
-        const recipientLasttNameStatus = recipientFirstNameStatus === true ? false : true ;
-        validityTracker.push({recipientName : {
+        const recipientLastNameStatus = recipientNameObj.donorLastName === '' ? false : true ;
+        validityTracker.push({recipient : {
             recipientFirstName : recipientFirstNameStatus,
-            recipientLasttName : recipientLasttNameStatus
+            recipientLastName : recipientLastNameStatus
         }})
     } else {
         validityTracker.push({recipientName : 'valid'})
@@ -188,10 +189,10 @@ export function honorFormValidation(state){
         if(honoreeNameObj.donorFirstName === '' || honoreeNameObj.donorLastName === ''){
             //if either are blank then return an object indicating the invalid name fields
             const honoreeFirstNameStatus = honoreeNameObj.donorFirstName === '' ? false : true ;
-            const honoreeLasttNameStatus = honoreeFirstNameStatus === true ? false : true ;
+            const honoreeLastNameStatus = honoreeFirstNameStatus === true ? false : true ;
             validityTracker.push({ honoreeName : {
                 honoreeFirstName : honoreeFirstNameStatus,
-                honoreeLasttNameStatus : honoreeLasttNameStatus
+                honoreeLastName : honoreeLastNameStatus
             }})
         } else {
             validityTracker.push({honoreeName : 'valid'})

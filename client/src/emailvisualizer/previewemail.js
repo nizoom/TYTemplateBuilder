@@ -23,9 +23,7 @@ const IntroSentence = (props) => {
     )
 }
 
-const DearDonorStr = (props) => {
-
-    const emailData = props.emailData
+const DearDonorStr = (props) => {   
 
     function checkForUndefinedFirstName(firstName){
         return (firstName === undefined ? 'FIRST NAME REQUIRED' : firstName)
@@ -33,15 +31,11 @@ const DearDonorStr = (props) => {
 
     const determineNameStr = () => { // this function returns the str of names to be grammatically correct after 'Dear' in case the user has added more than 1 donor
 
-        const allNames = emailData.donorNames;
-
-        const firstNames = allNames.map(obj => {
+        const firstNames = props.allNames.map(obj => {
                const firstName = checkForUndefinedFirstName( obj.donorFirstName );
                return firstName
         })
-        //1 name only
-
-        // console.log(firstNames)
+        //first name only
 
         if(firstNames.length === 1){
             // console.log('1 name')
@@ -72,9 +66,6 @@ const DearDonorStr = (props) => {
                 } else {
                     finalStr += `and ${name}`
                 }
-            
-           
-  
             })
 
             return finalStr;
@@ -83,10 +74,11 @@ const DearDonorStr = (props) => {
 
     }
 
+    
     return (
         <span>
 
-        {  emailData.donorNames.length > 0 ?
+        {  props.allNames.length > 0?
             <span className='dynamic-text' > {determineNameStr()}</span> :
             <span className='dynamic-text' > Donor </span> 
             }
@@ -102,10 +94,13 @@ const DearDonorStr = (props) => {
 const EmailPreview = (props) => {
 
     const emailData = props.emailData
+
+    const allNames = Array.isArray(emailData.donorNames) ? emailData.donorNames : Object.values(emailData.donorNames)
+
     
     return (
         <div className='preview-content'> 
-            <h4 className='dear'> Dear <DearDonorStr emailData = {props.emailData}/>, </h4>
+            <h4 className='dear'> Dear <DearDonorStr allNames = {allNames}/>, </h4>
 
             <p className='main-copy'> <IntroSentence emailData = {emailData}/>
                     Because of you, women and girls who are most at risk during this time of crisis will have access to transformative 

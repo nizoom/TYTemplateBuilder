@@ -38,12 +38,10 @@ const Dropdown = ( props ) => {
     })
 
 
-   
-
     return (
-        <div className='dropdown-wrapper long-dropdown-position'>
+        <div className={props.fieldValidity === 'invalid' ? 'incomplete-dropdown dropdown-wrapper long-dropdown-position' :'dropdown-wrapper long-dropdown-position'}>
             <div>
-                <button className={props.cssClass} onClick = {initDropdown}>  {props.prefill} </button>
+                <button className='dropdown-options' onClick = {initDropdown}>  {props.prefill} </button>
             
             </div>
             <div>

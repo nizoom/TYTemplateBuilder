@@ -22,6 +22,8 @@ const NextStepBtn = (props) => {
                 props.reportIncompleteFields(validationStatus)
             }
         } else {
+            //clear the validation state to valid 
+            props.reportIncompleteFields(false)
             props.goTotNextPreviousForm(-1)
         }
        

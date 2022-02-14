@@ -19,6 +19,8 @@ const StandardInputField = (props) => {
     function handleChange(event){
 
       const userInput = event.target.value;
+
+  
       
       setValue(userInput)
 
@@ -45,12 +47,12 @@ const StandardInputField = (props) => {
   // useEffect(() => {
   //   console.log(value)
   // }, [value])
-
+    // console.log(props.incompleteFields);
 
     return(
         <div className='input-field-position'> 
    
-            <input className={props.incompleteFields ===  'invalid' ? 'incomplete': props.cssClass} placeholder= { props.incompleteFields ? props.prefill + ' required' : props.prefill} 
+            <input className={props.incompleteFields ===  'invalid' ? 'incomplete': props.cssClass} placeholder= {props.incompleteFields ===  'invalid' ? `${props.prefill} required` : props.prefill}
             onChange={handleChange} value = {props.value !== undefined ? props.value : ''} type = {props.type} />
 
           

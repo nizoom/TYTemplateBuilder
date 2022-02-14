@@ -56,6 +56,11 @@
     gap: 28px;
 }
 
+.incomplete-dropdown{
+    border-top: 3px solid red;
+  }
+  
+
 /* new drop down color  background-color: #08021d;; 
 
 new background color for fields #04010F */

@@ -13,15 +13,22 @@ const RenderNameComponent = (props) => {
 
     function updateNames(name){
 
-            const index = name.index
+     
+
+            const index = name.index;
 
             const key = Object.keys(name)[0]
 
             const value = Object.values(name)[0]
 
             //create shallow copy
-   
-            let newArr = [...names]
+            const namesState = !Array.isArray(names)? [names] : names;
+
+           
+
+            let newArr = [...namesState]
+
+            console.log(newArr);
 
             // establish next element in array that will retain everything that is already there at that index
             newArr[index] = { ... newArr[index]}
@@ -30,12 +37,65 @@ const RenderNameComponent = (props) => {
             newArr[index][key] = value;
 
             // save array to hook
-            // console.log(newArr)
-            setNames(newArr)
 
-            
-       
+            const ogNames = props.userChoices.donorNames;
+
+            // console.log(ogNames);  
+            // console.log(name);
+
+            if(props.recentPageChange){
+                // hitting the back btn clears the name fields after on change. this block tries to prevent that 
+
+                //merge update with ogNames 
+                let newNames = {...ogNames} //if no spread doesn't work try drilling down
+
+                //adding new name fields after is problematic bc the names are not in array format 
+                // convert existing nested obj to arr of obj and then create a new index where the new name goes
+
+                    console.log(newNames);
+
+                    newNames[index] = {...newNames[index], [key] : value}
+
+                    //update setNames with merged names
+                    
+                    setNames(newNames)  
+
+            } else {
+                // console.log(newArr)
+
+                setNames(newArr)
+            }
     }
+
+   
+
+    function accomdateNames(newName, temporaryObj){
+        if( !newName.hasOwnProperty('donorFirstName')) {
+        newName.donorFirstName = ''
+        }
+
+        if( !newName.hasOwnProperty('donorLastName')) {
+        newName.donorLastName = ''
+        }
+
+        let values = Object.values(temporaryObj)
+
+        //create a new index where the new name goes
+        if(newName.index + 1 > values.length){
+            //create new object 
+            console.log('caught')
+
+            delete newName.index
+
+            values.push(newName)
+
+        }
+    
+        return values
+
+    
+    }
+
 
     const [donorFields, setDonorFields] = useState({numberOfFields : 0});
 
@@ -50,13 +110,15 @@ const RenderNameComponent = (props) => {
     useEffect(() => {
      
         const stateKey =  props.updateKey
-        // console.log(props.updateKey)
+        // console.log(({[stateKey] : names}))
         props.updateUserChoice({[stateKey] : names})
     }, [names])
 
 
 
-    
+    function convertObjstoArr(objs){
+
+    }
   
     function addNewDonorName(){
 
@@ -80,7 +142,9 @@ const RenderNameComponent = (props) => {
 
         //get index of btn and use that index to delete name element in names hook
 
-        let oldArr = [...names];
+        let oldArr = !Array.isArray(names) ? Object.values(names) : [...names];
+
+        // let oldArr = [...names];
 
         let newArr = oldArr.filter(element => {
             //keep elements that do not have the index of btnIndex - 1 (the -1 compensates for the misalignment of the arrays due to the index + 1 prop below on the renderAdditionalDonor.. function)
@@ -138,12 +202,16 @@ const RenderNameComponent = (props) => {
 
     
 
-    //
+
+
+    
         function getNameValidityStatus(nameFieldIndex, name){
-            console.log(props.fieldValidity);
-            console.log(nameFieldIndex);
             const fieldValidity = props.fieldValidity
-         
+        
+          //honoree situation 
+          if(fieldValidity === 'invalid'){
+              return 'invalid'
+          }
           //if all name fields are valid
             if(fieldValidity === 'valid'){
                 return 'valid'
@@ -156,6 +224,15 @@ const RenderNameComponent = (props) => {
                     //if nameFieldIndex is greater than fieldValidity.length then return 'valid' bc it means the user hasn't entered anything yet on those new fields 
 
                     if(fieldValidity.length - 1  < nameFieldIndex){
+                        return 'invalid'
+                    }
+                    
+
+                    if(fieldValidity[name] === true){
+                        return 'valid'
+                    }
+                    if(fieldValidity[name] === false){
+                       
                         return 'invalid'
                     }
 
@@ -188,7 +265,7 @@ const RenderNameComponent = (props) => {
 
                 <StandardInputField cssClass = 'short-input-field first-name' prefill = 'First name' updateNames = {updateNames} updateKey = 'donorFirstName' type = "name" index = {0} 
                 
-                    incompleteFields = {getNameValidityStatus(0, 'donorFirstName')} 
+                    incompleteFields = {getNameValidityStatus(0, `${props.validationPropertyName}FirstName`)} //donorFirstName
                     // this value prop forks the proces of receiving values for either the honor form (props.value) or donor form(getValue) 
                     value = {   props.value!== undefined ? props.value[0] : getValue(0, 'donorFirstName')}/>
 
@@ -196,7 +273,7 @@ const RenderNameComponent = (props) => {
 
                     value = {   props.value!== undefined ? props.value [1]: getValue(0, 'donorLastName')} 
                     
-                    incompleteFields = {getNameValidityStatus(0, 'donorLastName')}
+                    incompleteFields = {getNameValidityStatus(0, `${props.validationPropertyName}LastName`)} //donorLastName
                     />
 
                 {props.type === 'donor form' ? <AddDonorBtn changeNumberOfNameFields = {addNewDonorName} operation = '+' tooltipMsg = 'Add another donor name' index = {0} /> : null}

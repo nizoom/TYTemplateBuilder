@@ -49,8 +49,13 @@ const DonationForm = (props) => {
 
     return(
         <div className='new-donor-form-wrapper'>
-            <RenderNameComponent updateUserChoice = {props.updateUserChoice} fieldValidity = {getValidityStatus('namesStatus')} 
-            updateKey = 'donorNames' inputLabel = 'Donor name:' cssClass='donor-name-wrapper' type = 'donor form' userChoices = {props.userChoices}/>
+            
+            <RenderNameComponent updateUserChoice = {props.updateUserChoice} updateKey = 'donorNames' inputLabel = 'Donor name:' cssClass='donor-name-wrapper' type = 'donor form' userChoices = {props.userChoices}
+            fieldValidity = {getValidityStatus('namesStatus')} 
+            validationPropertyName = 'donor'
+            recentPageChange = {props.recentPageChange}
+            updatePageChangeState ={props.updatePageChangeState}
+            />
 
             <DonationAmount updateUserChoice = {props.updateUserChoice} fieldValidity = {getValidityStatus('donationAmount')} userChoices = {props.userChoices}/>
 

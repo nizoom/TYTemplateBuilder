@@ -28,11 +28,25 @@ function App() {
     // console.log(Object.keys(choice))
     const [keyName] = Object.keys(choice);
     const [valueName] = Object.values(choice)
-    // console.log(`${keyName} : ${valueName}`)
-    setUserChoices({
-      ...userChoices,
-      [keyName] : valueName
-    })
+    // console.log(keyName)
+    // console.log(valueName);
+
+    // if(recentPageChange && keyName === 'donorNames'){
+    //   const ogNames = userChoices.donorNames;
+    //   // update names from original state 
+    //   const newNameObj = 
+
+
+    //   setRecentPageChange(false)
+
+    // }   else {
+
+      setUserChoices({
+        ...userChoices,
+        [keyName] : valueName
+      })
+    // }
+
 
     // console.log(userChoices)
   } 
@@ -63,6 +77,11 @@ function App() {
     setIncompleteFields(fields)
   } 
 
+  const [recentPageChange, setRecentPageChange] = useState(false)
+
+  function updatePageChangeState(){
+    setRecentPageChange(false)
+  }
 
   const [formPage, setFormPage] = useState(1)
 
@@ -71,9 +90,11 @@ function App() {
     // direction is + 1 or - 1
     if(direction > 0) {
       setFormPage(formPage + 1)
+      setRecentPageChange(true)
      
     } else {
       setFormPage(formPage  - 1)
+      setRecentPageChange(true)
     }
 
     //setFormPage as such 
@@ -118,7 +139,9 @@ function App() {
                   <Dropdown  prefill = {userChoices.templateType} cssClass = 'long-dropdown' 
                   options = {['New donor', 'Recurring donor']} updateUserChoice = {updateUserChoice} updateStep = {updateStep} updateKey = 'templateType'/> 
 
-                  <PresentForm templateType = {userChoices.templateType} updateUserChoice = {updateUserChoice} userChoices = {userChoices} incompleteFields = {incompleteFields}/> </div>
+                  <PresentForm templateType = {userChoices.templateType} updateUserChoice = {updateUserChoice} userChoices = {userChoices} incompleteFields = {incompleteFields} recentPageChange = {recentPageChange}
+                  updatePageChangeState = {updatePageChangeState}
+                  /> </div>
 
                   : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices} getHonorState = {getHonorState}/> 
 

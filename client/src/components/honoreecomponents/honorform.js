@@ -55,17 +55,44 @@ const HonorForm = (props) => {
 
    }
 
+   const [incompleteFields, setIncompleteFields] = useState(false)
+
+
+
    function handleSubmit(e){
      e.preventDefault();
 
      if(honoringUserChoices.honorForm !== 'No'){
-       const validationStatus = honorFormValidation(honoringUserChoices)
-       console.log(validationStatus)
+       const fieldValidity = honorFormValidation(honoringUserChoices)
+       console.log(fieldValidity)
+       setIncompleteFields(fieldValidity)
      } else {
       console.log('submitting');
      }
      
    }
+
+   
+   function getValidityStatus(field){
+    //default state of this hook before hitting submit
+     if(!incompleteFields){
+       return 'valid'
+     }
+      //get index of where field is mentioned in the validation state arr of objs
+     const keys = incompleteFields.map(obj => {
+        const keys = Object.keys(obj)[0]
+        return keys
+     })
+
+     const indexOfProperty = keys.indexOf(field);
+
+     //return the value of that property 
+     const value = Object.values(Object.values(incompleteFields)[indexOfProperty])[0] // drills down to the 'valid' / 'invalid' value 
+
+    //  console.log(value)
+     return value 
+   }
+
 
    
     return (
@@ -85,17 +112,32 @@ const HonorForm = (props) => {
 
                   <label className = 'template-field-name' style = {{fontSize : 'medium'}}> Honoring/Memory: </label>
 
-                  <Dropdown prefill = {honoringUserChoices.honoringOrMemory} cssClass = 'long-dropdown'  options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honoringOrMemory'/>
+                  <Dropdown prefill = {honoringUserChoices.honoringOrMemory} options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honoringOrMemory'
+                  fieldValidity = {getValidityStatus('honoringOrMemory')}
+                  />
                 
-                </div>                
-            
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honoreeName' userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}/>            
+                </div>          
 
-                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'recipientName' value = {determineNamesValue(honoringUserChoices.recipientName, 'recipientName')}/>           
+
+            
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honoreeName' 
+                userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}
+                
+                fieldValidity = {getValidityStatus('honoreeName')} 
+                validationPropertyName = 'honoree' />            
+
+                <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'recipientName' 
+                value = {determineNamesValue(honoringUserChoices.recipientName, 'recipientName')} 
+
+                fieldValidity = {getValidityStatus('recipient')} 
+                validationPropertyName = 'recipient'  />           
           
+                
+                
+                
                 <CustomMsg updateKey = 'customMsg' updateUserChoice = {updateHonorUserChoice}/>
 
-                <EmailField cssClass = 'honoree-email' updateKey = 'honoreeEmail' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice}/>
+                <EmailField cssClass = 'honoree-email' updateKey = 'honoreeEmail' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice} fieldValidity = {getValidityStatus('honoreeEmail')}/>
        
                 </section>
             
