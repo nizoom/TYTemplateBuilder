@@ -28,24 +28,24 @@ const HonorEmailPreview = (props) => {
     
 
     const determineDonorNameState = (donorNames) => {
-        // if(donorNames.length < 2){
-        //     return `${donorNames[0].donorFirstName}  ${donorNames[0].donorLastName}`
-        // }
+        if(donorNames.length < 2){
+            return `${donorNames[0].donorFirstName}  ${donorNames[0].donorLastName}`
+        }
 
-        // let namesStr = ''
-
-        // donorNames.forEach((nameObj, index) => {
-        //     if(index !== donorNames.length - 1){ //if this isn't the last person in the list then add the 'and'
-        //         namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName} and `
-        //     } else {
-        //         namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName}`
-        //     }
+        let namesStr = ''
+        console.log(donorNames);
+        donorNames.forEach((nameObj, index) => {
+            if(index !== donorNames.length - 1){ //if this isn't the last person in the list then add the 'and'
+                namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName} and `
+            } else {
+                namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName}`
+            }
             
-        // })
+        })
 
-        // return namesStr;
+        return namesStr;
 
-        return 'Nissim'
+        // return 'Nissim'
        
     }
 

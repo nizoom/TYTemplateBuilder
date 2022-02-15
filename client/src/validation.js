@@ -47,9 +47,9 @@ export function donationFormValidation(state){
         validityTracker.push({recipientEmail : 'valid'})
     }   
 
-  
+   const donorNames = Array.isArray(shallowCopyOfState.donorNames) ? shallowCopyOfState.donorNames :  Object.values(shallowCopyOfState.donorNames)
    //get array of name validation and see if any elements are invalid 
-   const testedNames = validateDonorNames(shallowCopyOfState.donorNames)
+   const testedNames = validateDonorNames(donorNames)
 
    const invalidNameTrigger = testedNames.find(testedName => typeof(testedName) === 'object');
 
@@ -58,6 +58,7 @@ export function donationFormValidation(state){
    if(invalidNameTrigger !== undefined ) { validityTracker.push({namesStatus : testedNames}) } else { validityTracker.push({namesStatus : 'valid'})  };
 
    function validateDonorNames(namesArr){
+
          // for names both first name and last name must be filled out for the name to be valid
         let namesValidityTracker = []
         if(namesArr.length < 1){

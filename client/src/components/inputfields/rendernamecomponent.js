@@ -28,8 +28,6 @@ const RenderNameComponent = (props) => {
 
             let newArr = [...namesState]
 
-            console.log(newArr);
-
             // establish next element in array that will retain everything that is already there at that index
             newArr[index] = { ... newArr[index]}
 
@@ -38,14 +36,14 @@ const RenderNameComponent = (props) => {
 
             // save array to hook
 
-            const ogNames = props.userChoices.donorNames;
+            
 
             // console.log(ogNames);  
             // console.log(name);
 
             if(props.recentPageChange){
                 // hitting the back btn clears the name fields after on change. this block tries to prevent that 
-
+                const ogNames = props.userChoices.donorNames;
                 //merge update with ogNames 
                 let newNames = {...ogNames} //if no spread doesn't work try drilling down
 
@@ -67,35 +65,6 @@ const RenderNameComponent = (props) => {
             }
     }
 
-   
-
-    function accomdateNames(newName, temporaryObj){
-        if( !newName.hasOwnProperty('donorFirstName')) {
-        newName.donorFirstName = ''
-        }
-
-        if( !newName.hasOwnProperty('donorLastName')) {
-        newName.donorLastName = ''
-        }
-
-        let values = Object.values(temporaryObj)
-
-        //create a new index where the new name goes
-        if(newName.index + 1 > values.length){
-            //create new object 
-            console.log('caught')
-
-            delete newName.index
-
-            values.push(newName)
-
-        }
-    
-        return values
-
-    
-    }
-
 
     const [donorFields, setDonorFields] = useState({numberOfFields : 0});
 
@@ -113,12 +82,7 @@ const RenderNameComponent = (props) => {
         // console.log(({[stateKey] : names}))
         props.updateUserChoice({[stateKey] : names})
     }, [names])
-
-
-
-    function convertObjstoArr(objs){
-
-    }
+    
   
     function addNewDonorName(){
 

@@ -72,25 +72,23 @@ const HonorForm = (props) => {
      
    }
 
-   
-   function getValidityStatus(field){
+
+
+   function getValidityStatus(field, index){
+
     //default state of this hook before hitting submit
-     if(!incompleteFields){
+     if(!incompleteFields || incompleteFields ==='submit'){
        return 'valid'
      }
-      //get index of where field is mentioned in the validation state arr of objs
-     const keys = incompleteFields.map(obj => {
-        const keys = Object.keys(obj)[0]
-        return keys
-     })
+   
+     
+     const validityObj = incompleteFields[index];
 
-     const indexOfProperty = keys.indexOf(field);
+     const validity = Object.values(validityObj)[0]
 
-     //return the value of that property 
-     const value = Object.values(Object.values(incompleteFields)[indexOfProperty])[0] // drills down to the 'valid' / 'invalid' value 
 
-    //  console.log(value)
-     return value 
+     return validity
+
    }
 
 
@@ -113,7 +111,7 @@ const HonorForm = (props) => {
                   <label className = 'template-field-name' style = {{fontSize : 'medium'}}> Honoring/Memory: </label>
 
                   <Dropdown prefill = {honoringUserChoices.honoringOrMemory} options = {['In honor of', 'In memory of']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honoringOrMemory'
-                  fieldValidity = {getValidityStatus('honoringOrMemory')}
+                  fieldValidity = {getValidityStatus('honoringOrMemory', 1)}
                   />
                 
                 </div>          
@@ -123,13 +121,13 @@ const HonorForm = (props) => {
                 <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'honoreeName' inputLabel = 'Honoree name:' cssClass = 'honoree-name-field' type = 'honoreeName' 
                 userCoices = {honoringUserChoices} value = {determineNamesValue(honoringUserChoices.honoreeName, 'honoreeName')}
                 
-                fieldValidity = {getValidityStatus('honoreeName')} 
+                fieldValidity = {getValidityStatus('honoreeName', 3)} 
                 validationPropertyName = 'honoree' />            
 
                 <RenderNameComponent  updateUserChoice = {updateHonorUserChoice} updateKey = 'recipientName' inputLabel = 'Recipient name:' cssClass = 'recipient-name-field' type = 'recipientName' 
                 value = {determineNamesValue(honoringUserChoices.recipientName, 'recipientName')} 
 
-                fieldValidity = {getValidityStatus('recipient')} 
+                fieldValidity = {getValidityStatus('recipient', 2)} 
                 validationPropertyName = 'recipient'  />           
           
                 
@@ -137,7 +135,7 @@ const HonorForm = (props) => {
                 
                 <CustomMsg updateKey = 'customMsg' updateUserChoice = {updateHonorUserChoice}/>
 
-                <EmailField cssClass = 'honoree-email' updateKey = 'honoreeEmail' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice} fieldValidity = {getValidityStatus('honoreeEmail')}/>
+                <EmailField cssClass = 'honoree-email' updateKey = 'honoreeEmail' value = {honoringUserChoices.honoreeEmail} updateUserChoice = {updateHonorUserChoice} fieldValidity = {getValidityStatus('honoreeEmail', 0)}/>
        
                 </section>
             
