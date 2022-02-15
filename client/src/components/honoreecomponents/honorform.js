@@ -6,6 +6,8 @@ import RenderNameComponent from '../inputfields/rendernamecomponent'
 import CustomMsg from './custommsg';
 import EmailField from '../inputfields/emailfield';
 import { honorFormValidation } from '../../validation';
+import { assembleLanguage } from '../../mailer/assemblelanguage';
+import HonorerMsg from './honorermsg';
 
 const HonorForm = (props) => {
 
@@ -62,10 +64,12 @@ const HonorForm = (props) => {
    function handleSubmit(e){
      e.preventDefault();
 
-     if(honoringUserChoices.honorForm !== 'No'){
+     if(honoringUserChoices.honorForm !== 'No'){ // there is an honor form
        const fieldValidity = honorFormValidation(honoringUserChoices)
-       console.log(fieldValidity)
        setIncompleteFields(fieldValidity)
+       if(fieldValidity === 'submit'){
+          assembleLanguage(honoringUserChoices, props.userChoices)
+       }
      } else {
       console.log('submitting');
      }
@@ -99,12 +103,18 @@ const HonorForm = (props) => {
               <label className = 'template-field-name'> Honoring: </label>
 
               <Dropdown prefill = {honoringUserChoices.honorForm} cssClass = 'long-dropdown'  options = {['Yes', 'No']} updateUserChoice = {updateHonorUserChoice} updateKey = 'honorForm'/>
+
+            
             </div>
+       
 
             { honoringUserChoices.honorForm === 'Yes' ? 
-
+            
+           
 
                <section className='honoree-fields-wrapper'>
+
+                 <HonorerMsg/>
 
                 <div className='in-honor-memory-wrapper'>
 
