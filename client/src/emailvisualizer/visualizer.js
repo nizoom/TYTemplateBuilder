@@ -9,7 +9,7 @@ const Visualizer = (props) => {
     return (
         <section className='msg-wrapper'>
             <div className='inner-content'>   
-                <PresentPreview userChoices = {props.userChoices} formPage = {props.formPage} honorState = {props.honorState}/>
+                <PresentPreview userChoices = {props.userChoices} formPage = {props.formPage} honorState = {props.honorState} updateUserChoice = {props.updateUserChoice}/>
             </div>
         </section>
     )

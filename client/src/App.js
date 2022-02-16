@@ -18,7 +18,8 @@ function App() {
       donationDate : 'mm-dd-yyyy',
       recipientEmail : '',
       taxParagraph : 'Yes',
-      donorNames : [] //arr of objects with firstName and lastName properties for each element    
+      donorNames : [], //arr of objects with firstName and lastName properties for each element    
+      donorStr : ''
   })
 
 
@@ -156,7 +157,7 @@ function App() {
         
           </form>
 
-        <Visualizer userChoices = {userChoices} formPage = {formPage} honorState = {honorState} />
+        <Visualizer userChoices = {userChoices} formPage = {formPage} honorState = {honorState} updateUserChoice = {updateUserChoice}/>
 
 
       </div>

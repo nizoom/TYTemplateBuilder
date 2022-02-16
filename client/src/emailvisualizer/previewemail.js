@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 import ThisIsWhatYouMakePossible from './thisiswhatyoumakepossible';
 
 
@@ -67,6 +67,7 @@ const DearDonorStr = (props) => {
                     finalStr += `and ${name}`
                 }
             })
+       
 
             return finalStr;
 
@@ -74,12 +75,19 @@ const DearDonorStr = (props) => {
 
     }
 
-    
+    const finalStr = determineNameStr();
+
+    useEffect(() => {
+        console.log('updating donorstr');
+        props.updateUserChoice({donorStr : finalStr})
+    },[finalStr])
+
+
     return (
         <span>
 
         {  props.allNames.length > 0?
-            <span className='dynamic-text' > {determineNameStr()}</span> :
+            <span className='dynamic-text' > {finalStr}</span> :
             <span className='dynamic-text' > Donor </span> 
             }
         </span>
@@ -100,7 +108,7 @@ const EmailPreview = (props) => {
     
     return (
         <div className='preview-content'> 
-            <h4 className='dear'> Dear <DearDonorStr allNames = {allNames}/>, </h4>
+            <h4 className='dear'> Dear <DearDonorStr allNames = {allNames} updateUserChoice= {props.updateUserChoice}/>, </h4>
 
             <p className='main-copy'> <IntroSentence emailData = {emailData}/>
                     Because of you, women and girls who are most at risk during this time of crisis will have access to transformative 

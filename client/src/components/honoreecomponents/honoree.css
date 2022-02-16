@@ -128,5 +128,5 @@
 .hidden {
     visibility: hidden;
     opacity: 0;
-    transition: visibility 0s 5s, opacity 5s linear;
+    transition: visibility 0s 10s, opacity 10s linear;
 }

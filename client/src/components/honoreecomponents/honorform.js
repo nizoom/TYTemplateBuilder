@@ -72,6 +72,7 @@ const HonorForm = (props) => {
        }
      } else {
       console.log('submitting');
+      assembleLanguage(honoringUserChoices, props.userChoices)
      }
      
    }
