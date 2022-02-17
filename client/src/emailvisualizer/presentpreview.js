@@ -7,9 +7,9 @@ const PresentPreview = (props) => {
 
 
     const templateType = props.userChoices.templateType
-
+    
     if(props.formPage === 2){
-        return  <HonorEmailPreview honorState = {props.honorState} donorState = {props.userChoices}/>
+        return  <HonorEmailPreview honorState = {props.honorState} donorState = {props.userChoices} getHonoreeVizStrs = {props.getHonoreeVizStrs}/>
     }
 
     if(templateType === 'New donor'){

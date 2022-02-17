@@ -31,17 +31,6 @@ function App() {
     const [valueName] = Object.values(choice)
     // console.log(keyName)
     // console.log(valueName);
-
-    // if(recentPageChange && keyName === 'donorNames'){
-    //   const ogNames = userChoices.donorNames;
-    //   // update names from original state 
-    //   const newNameObj = 
-
-
-    //   setRecentPageChange(false)
-
-    // }   else {
-
       setUserChoices({
         ...userChoices,
         [keyName] : valueName
@@ -114,7 +103,11 @@ function App() {
     }
   }
 
-
+  const [honoreeVizStrs, setHonoreeVizStrs] = useState()
+  function getHonoreeVizStrs(obj){ // this function gets the strings needed for the honoree email from the visualizer to pass eventually to assembleLanguage file
+  
+    setHonoreeVizStrs(obj)
+  }
 
 
   return (
@@ -144,7 +137,7 @@ function App() {
                   updatePageChangeState = {updatePageChangeState}
                   /> </div>
 
-                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices} getHonorState = {getHonorState}/> 
+                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices} getHonorState = {getHonorState} honoreeVizStrs = {honoreeVizStrs}/> 
 
                   }
 
@@ -157,7 +150,7 @@ function App() {
         
           </form>
 
-        <Visualizer userChoices = {userChoices} formPage = {formPage} honorState = {honorState} updateUserChoice = {updateUserChoice}/>
+        <Visualizer userChoices = {userChoices} formPage = {formPage} honorState = {honorState} updateUserChoice = {updateUserChoice} getHonoreeVizStrs ={getHonoreeVizStrs}/>
 
 
       </div>

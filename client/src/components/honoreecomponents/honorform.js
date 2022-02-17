@@ -20,7 +20,8 @@ const HonorForm = (props) => {
             honoreeName : [],
             recipientName : [],
             honoreeEmail : '',
-            customMsg: ''
+            customMsg: '',
+            dearHonoreeStr : ''
     })
 
     function updateHonorUserChoice(choice){
@@ -68,7 +69,10 @@ const HonorForm = (props) => {
        const fieldValidity = honorFormValidation(honoringUserChoices)
        setIncompleteFields(fieldValidity)
        if(fieldValidity === 'submit'){
-          assembleLanguage(honoringUserChoices, props.userChoices)
+
+          const combinedHonoringInfo = {...honoringUserChoices, ...props.honoreeVizStrs}
+
+          assembleLanguage(combinedHonoringInfo, props.userChoices)
        }
      } else {
       console.log('submitting');

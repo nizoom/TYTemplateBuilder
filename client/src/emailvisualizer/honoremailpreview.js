@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useEffect } from 'react';
 
 const HonorEmailPreview = (props) => {
 
@@ -6,7 +6,7 @@ const HonorEmailPreview = (props) => {
 
     const determineRecipientNameState = (emailData) => { // accounts for how props are looking as they go through the render cycle
         // console.log(emailData)
-      if(emailData !== undefined){
+      if(emailData !== undefined && emailData.recipientName !== undefined){
 
         const recipientName = emailData.recipientName
         // console.log('fired')
@@ -16,7 +16,7 @@ const HonorEmailPreview = (props) => {
             }
             return 'Recipient'
         } 
-
+  
         return 'Recipient'
 
       }
@@ -51,50 +51,76 @@ const HonorEmailPreview = (props) => {
 
     const determineMemoryOrHonorStr = (emailData) => {
         // console.log(emailData)
-        const strState = emailData.honoringOrMemory;
-        const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
-        const recipient = determineRecipientNameState(emailData);
-
-  
-        if(strState !== 'in Honor or in Memory'){
-            if(strState === 'In memory of'){
-                console.log('memory')
-                return `memory of ${honoree}`
-            }
-            if(strState === 'In honor of'){
-       
-                if (honoree === recipient ){ // most likely scenario
-                   return 'honor you in this way'
-                } else {
-                    return `honor of ${honoree}.`
+        if(emailData.honoreeName !== undefined){
+            const strState = emailData.honoringOrMemory;
+            const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
+            const recipient = determineRecipientNameState(emailData);
+    
+      
+            if(strState !== 'in Honor or in Memory'){
+                if(strState === 'In memory of'){
+                    console.log('memory')
+                    return `memory of ${honoree}`
                 }
-            }     
+                if(strState === 'In honor of'){
            
+                    if (honoree === recipient ){ // most likely scenario
+                       return 'honor you in this way'
+                    } else {
+                        return `honor of ${honoree}.`
+                    }
+                }     
+               
+            } else {
+                return 'in honor / in memory of honoree'
+            }
         } else {
             return 'in honor / in memory of honoree'
         }
+       
     }
 
     const determineAdressingStyle = (emailData) => {
-        const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
-        const recipient = determineRecipientNameState(emailData);
-        
-        // console.log(honoree)
-        // console.log(recipient)
-
-        if(honoree !== 'honoree' || recipient !== 'Recipient'){ //default state
-            const sameHonoreeAndRecipient = honoree === recipient ? true : false 
-
-            if(honoree === recipient){
-                return 'honor you'
-            } if (honoree !== 'honoree' && recipient !== 'Recipient' && !sameHonoreeAndRecipient){
-                return 'honor them'
-            }
+        if(emailData.honoreeName !== undefined){
+            const honoree = emailData.honoreeName.length > 0 ? emailData.honoreeName[0].donorFirstName : 'honoree'
+            const recipient = determineRecipientNameState(emailData);
             
-        } 
-            // console.log('default')
-            return 'honor you / them '
+            // console.log(honoree)
+            // console.log(recipient)
+    
+            if(honoree !== 'honoree' || recipient !== 'Recipient'){ //default state
+                const sameHonoreeAndRecipient = honoree === recipient ? true : false 
+    
+                if(honoree === recipient){
+                    return 'honor you'
+                } if (honoree !== 'honoree' && recipient !== 'Recipient' && !sameHonoreeAndRecipient){
+                    return 'honor them'
+                }
+                
+            } 
+                // console.log('default')
+                return 'honor you / them '
+        }
+        return 'honor you / them '
     }
+
+    const dearHonoreeStr = determineRecipientNameState(emailData)
+    const thesePeopleDonatedStr = determineAdressingStyle(emailData)
+    const inHonorOrMemeoryStr = determineMemoryOrHonorStr(emailData)
+    const thoseGivingStr = determineDonorNameState(donorNames)
+    
+    useEffect(() => {
+        props.getHonoreeVizStrs({
+            dearHonoreeStr : dearHonoreeStr,
+    
+            thesePeopleDonatedStr: thesePeopleDonatedStr,
+    
+            inHonorOrMemeoryStr : inHonorOrMemeoryStr,
+
+            thoseGivingStr : thoseGivingStr
+        })
+    },[dearHonoreeStr, thesePeopleDonatedStr, inHonorOrMemeoryStr, thoseGivingStr])
+
 
     return (
         <div>
@@ -105,17 +131,17 @@ const HonorEmailPreview = (props) => {
         <div className='storycloth-wrapper'>
                 <p className='storycloth'> Story Cloth Photo </p>
             </div>
-             <h4 className='dear'> Dear  <span className='dynamic-text'> {determineRecipientNameState(emailData)} </span></h4>
+             <h4 className='dear'> Dear  <span className='dynamic-text'> {dearHonoreeStr} </span></h4>
 
           
 
              <p className='main-copy'>
-             This note is to let you know that <span className='dynamic-text'> {determineDonorNameState(donorNames)} </span> has made a 
+             This note is to let you know that <span className='dynamic-text'> {thoseGivingStr} </span> has made a 
              very generous donation to Common Threads Project in 
-             <span className='dynamic-text'> {determineMemoryOrHonorStr(emailData)} </span>. 
-             We are deeply grateful that they chose to <span className='dynamic-text'> {determineAdressingStyle(emailData)}</span>in this way. 
+             <span className='dynamic-text'> {inHonorOrMemeoryStr} </span>. 
+             We are deeply grateful that they chose to <span className='dynamic-text'> {thesePeopleDonatedStr}</span>in this way. 
              
-             We join <span className='dynamic-text'> {determineDonorNameState(donorNames)} </span> in wishing you all the best.
+             We join <span className='dynamic-text'> {thoseGivingStr} </span> in wishing you all the best.
              </p>
 
 

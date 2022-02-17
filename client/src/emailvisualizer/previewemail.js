@@ -78,7 +78,6 @@ const DearDonorStr = (props) => {
     const finalStr = determineNameStr();
 
     useEffect(() => {
-        console.log('updating donorstr');
         props.updateUserChoice({donorStr : finalStr})
     },[finalStr])
 
