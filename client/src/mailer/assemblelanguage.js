@@ -15,9 +15,11 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         taxParagraph : taxParagraph,
 
-        email : donorInfo.recipient_email
+        email : donorInfo.recipient_email,
 
-        // emailSubject : 
+        subject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
+
+        templateType : donorInfo.templateType === 'New donor' ? 'newdonor' : 'recurringdonor'
 
     }
 
@@ -44,8 +46,6 @@ export function assembleLanguage(donorInfo, honorInfo){
             const actionSentence = (honorInfo.honoringOrMemory === 'In honor of') ? honorSentence : inMemoryOfSentence;
 
 
-
-
             const honorerObj = {
 
                 dearDonorStr : donorInfo.donorStr,
@@ -58,11 +58,14 @@ export function assembleLanguage(donorInfo, honorInfo){
                                  
                 actionSentence : actionSentence,
         
-                introSentence : introSentence
+                introSentence : introSentence,
         
-                //donor email
+                email : donorInfo.recipientEmail,
 
-                // emailSubject : 
+                subject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
+
+                templateType : 'honorer'
+
                 
             }
     
@@ -75,6 +78,30 @@ export function assembleLanguage(donorInfo, honorInfo){
 
     // Honoree email info for honoree.handlebars 
 
+    function getEmailSubjectStr(donorInfo){ // return the way the donor name should be appear in the email header to the honoree 
+        let finalStr = ''
+
+        const arrOfNames = donorInfo.donorNames 
+
+        // console.log(donorInfo );
+
+        arrOfNames.forEach(nameObj => {
+
+            const index = arrOfNames.indexOf(nameObj)
+
+
+            if(index !== 0){
+                finalStr += `and ${nameObj.donorFirstName} ${nameObj.donorLastName}`
+                return
+            }
+
+            finalStr += `${nameObj.donorFirstName} ${nameObj.donorLastName}`
+            return
+
+        })
+        return finalStr
+    }
+
     const honoreeObj = {
 
         honorStatus : honorInfo.honorForm, 
@@ -83,23 +110,35 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         thoseGivingStr : honorInfo.thoseGivingStr,
 
-        inHonorOrInMemoryStr : honorInfo.inHonorOrInMemoryStr,
+        inHonorOrInMemoryStr : honorInfo.inHonorOrMemoryStr,
 
         gratefulTheyChoseToStr : honorInfo.thesePeopleDonatedStr,
 
         customMsg : honorInfo.customMsg,
 
-        email : honorInfo.honoreeEmail
+        email : honorInfo.honoreeEmail,
 
-        // emailSubject : 
+        templateType : 'honoree',
+
+        emailSubject : `${getEmailSubjectStr(donorInfo)} has dedicated a donation to you`
     }
 
 
     console.log('test')
 
-    console.log(donorInfo);
+    console.log(standardDonorObj);
     
-    console.log(honorInfo);
+    console.log(honorObj());
+
+    console.log(honoreeObj);
+
+    function determineRelevantTemplates(){
+        if(!honorObj){
+            // just send a [standardDonorObj] 
+        } else {
+            // send [honoreeObj, honorObj]
+        }   
+    }
 
 }
 

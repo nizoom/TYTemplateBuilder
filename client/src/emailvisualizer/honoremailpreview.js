@@ -33,8 +33,23 @@ const HonorEmailPreview = (props) => {
         }
 
         let namesStr = ''
-        console.log(donorNames);
-        donorNames.forEach((nameObj, index) => {
+       // BUG OCCURS LINE 37 WHERE DONORNAMES IS NOT AN ARR? S
+        const donorNamesArr = Array.isArray(donorNames) ? donorNames : generateArrOfObjs(donorNames) //add objects to array where each object is its own element 
+
+        // console.log(donorNamesArr);
+
+        function generateArrOfObjs(donorNames){
+            let arr = [];
+            for(const property in donorNames){
+                arr.push(
+                  donorNames[property]
+                )
+            }
+            console.log(arr);
+            return arr;
+        }
+
+        donorNamesArr.forEach((nameObj, index) => {
             if(index !== donorNames.length - 1){ //if this isn't the last person in the list then add the 'and'
                 namesStr += `${nameObj.donorFirstName} ${nameObj.donorLastName} and `
             } else {

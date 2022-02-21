@@ -72,11 +72,11 @@ const HonorForm = (props) => {
 
           const combinedHonoringInfo = {...honoringUserChoices, ...props.honoreeVizStrs}
 
-          assembleLanguage(combinedHonoringInfo, props.userChoices)
+          assembleLanguage(props.userChoices, combinedHonoringInfo)
        }
      } else {
       console.log('submitting');
-      assembleLanguage(honoringUserChoices, props.userChoices)
+      assembleLanguage(props.userChoices, honoringUserChoices)
      }
      
    }

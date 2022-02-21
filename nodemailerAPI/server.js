@@ -3,8 +3,13 @@ const nodemailer = require("nodemailer");
 const app = express();
 const dotenv = require("dotenv")
 require('path')
+const cors = require("cors");
 
 const port = 3001;
+
+app.use(express.json());
+app.use(cors());
+
 app.listen(port, () => {
  console.log(`Server is running on port: ${port}`);
 });
@@ -32,14 +37,16 @@ let transporter = nodemailer.createTransport({
    });
 
 app.post('/send', function (req, res){
-    
+
+    //{req.body.mailerState.email}
+
     let mailOptions = {
 
         from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
         to: 'nissimram1812@gmail.com', //donation.TYToEmailAddress, //['info@commonthreadsproject.org', 
         bcc : '',
         subject: 'Test',
-        text: '',
+        text: '',           
         html: 'Hi from nodemailer API'//htmlToSend,
     
       };
