@@ -50,8 +50,6 @@ const RenderNameComponent = (props) => {
                 //adding new name fields after is problematic bc the names are not in array format 
                 // convert existing nested obj to arr of obj and then create a new index where the new name goes
 
-                    console.log(newNames);
-
                     newNames[index] = {...newNames[index], [key] : value}
 
                     //update setNames with merged names

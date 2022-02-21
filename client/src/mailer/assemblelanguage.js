@@ -1,4 +1,6 @@
+import { sendEmailToServer } from "./postreqtoserver"
 export function assembleLanguage(donorInfo, honorInfo){
+    console.log(honorInfo.inHonorOrMemeoryStr);
 
     const taxParagraph =  donorInfo.taxParagraph === 'Yes' ? `Please let this note serve as your receipt for a fully tax-deductible contribution of  ${donorInfo.donationAmount} 
     to Common Threads Project on ${donorInfo.donationDate}   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
@@ -26,10 +28,12 @@ export function assembleLanguage(donorInfo, honorInfo){
     // Honorer TY info for honorer.handlebars
 
     const honorObj = () => {
+
+       
         
         if(honorInfo.honorForm === 'Yes'){
 
-            const honoreeName = `${honorInfo.honoree_name[0].donorFistName} ${honorInfo.honoree_name[0].donorLastName}`
+            const honoreeName = `${honorInfo.honoreeName[0].donorFistName} ${honorInfo.honoreeName[0].donorLastName}`
 
             const newDonorIntroSentence = 'Welcome to the Common Threads family! We are delighted that you have chosen to join our mission.'
 
@@ -69,7 +73,7 @@ export function assembleLanguage(donorInfo, honorInfo){
                 
             }
     
-            return honorObj
+            return honorerObj
         } // else 
 
         return false 
@@ -81,9 +85,22 @@ export function assembleLanguage(donorInfo, honorInfo){
     function getEmailSubjectStr(donorInfo){ // return the way the donor name should be appear in the email header to the honoree 
         let finalStr = ''
 
-        const arrOfNames = donorInfo.donorNames 
+        let arrOfNames = donorInfo.donorNames 
 
-        // console.log(donorInfo );
+        arrOfNames = Array.isArray(arrOfNames) ? arrOfNames : generateArrOfObjs(arrOfNames) //add objects to array where each object is its own element 
+
+        // console.log(donorNamesArr);
+
+        function generateArrOfObjs(donorNames){
+            let arr = [];
+            for(const property in donorNames){
+                arr.push(
+                  donorNames[property]
+                )
+            }
+            return arr;
+        }
+
 
         arrOfNames.forEach(nameObj => {
 
@@ -125,20 +142,29 @@ export function assembleLanguage(donorInfo, honorInfo){
 
 
     console.log('test')
+    // console.log(donorInfo);
+    console.log(honorInfo);
 
     console.log(standardDonorObj);
     
-    console.log(honorObj());
+    // console.log(honorObj());
 
     console.log(honoreeObj);
 
     function determineRelevantTemplates(){
-        if(!honorObj){
+        if(!honorObj()){
             // just send a [standardDonorObj] 
+            sendEmailToServer([standardDonorObj])
+            console.log('sending standard email');
         } else {
+            
             // send [honoreeObj, honorObj]
+            sendEmailToServer([honoreeObj, honorObj])
+            console.log('sending two emails');
         }   
     }
+
+    determineRelevantTemplates()
 
 }
 

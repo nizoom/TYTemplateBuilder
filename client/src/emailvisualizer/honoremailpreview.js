@@ -45,7 +45,7 @@ const HonorEmailPreview = (props) => {
                   donorNames[property]
                 )
             }
-            console.log(arr);
+       
             return arr;
         }
 
@@ -121,7 +121,7 @@ const HonorEmailPreview = (props) => {
 
     const dearHonoreeStr = determineRecipientNameState(emailData)
     const thesePeopleDonatedStr = determineAdressingStyle(emailData)
-    const inHonorOrMemeoryStr = determineMemoryOrHonorStr(emailData)
+    const inHonorOrMemoryStr = determineMemoryOrHonorStr(emailData)
     const thoseGivingStr = determineDonorNameState(donorNames)
     
     useEffect(() => {
@@ -130,11 +130,11 @@ const HonorEmailPreview = (props) => {
     
             thesePeopleDonatedStr: thesePeopleDonatedStr,
     
-            inHonorOrMemeoryStr : inHonorOrMemeoryStr,
+            inHonorOrMemoryStr : inHonorOrMemoryStr,
 
             thoseGivingStr : thoseGivingStr
         })
-    },[dearHonoreeStr, thesePeopleDonatedStr, inHonorOrMemeoryStr, thoseGivingStr])
+    },[dearHonoreeStr, thesePeopleDonatedStr, inHonorOrMemoryStr, thoseGivingStr])
 
 
     return (
@@ -153,7 +153,7 @@ const HonorEmailPreview = (props) => {
              <p className='main-copy'>
              This note is to let you know that <span className='dynamic-text'> {thoseGivingStr} </span> has made a 
              very generous donation to Common Threads Project in 
-             <span className='dynamic-text'> {inHonorOrMemeoryStr} </span>. 
+             <span className='dynamic-text'> {inHonorOrMemoryStr} </span>. 
              We are deeply grateful that they chose to <span className='dynamic-text'> {thesePeopleDonatedStr}</span>in this way. 
              
              We join <span className='dynamic-text'> {thoseGivingStr} </span> in wishing you all the best.
