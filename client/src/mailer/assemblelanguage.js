@@ -1,6 +1,6 @@
 import { sendEmailToServer } from "./postreqtoserver"
 export function assembleLanguage(donorInfo, honorInfo){
-    console.log(honorInfo.inHonorOrMemeoryStr);
+    console.log(honorInfo.inHonorOrMemoryStr);
 
     const taxParagraph =  donorInfo.taxParagraph === 'Yes' ? `Please let this note serve as your receipt for a fully tax-deductible contribution of  ${donorInfo.donationAmount} 
     to Common Threads Project on ${donorInfo.donationDate}   No goods or services were provided in exchange for this contribution. Common Threads Project is an 
@@ -33,13 +33,17 @@ export function assembleLanguage(donorInfo, honorInfo){
         
         if(honorInfo.honorForm === 'Yes'){
 
-            const honoreeName = `${honorInfo.honoreeName[0].donorFistName} ${honorInfo.honoreeName[0].donorLastName}`
+            const honoreeFistName = honorInfo.honoreeName[0].donorFistName
+
+            const honoreeName = `${honorInfo.honoreeName[0].donorFirstName} ${honorInfo.honoreeName[0].donorLastName}`
+
+            console.log(honoreeName);
 
             const newDonorIntroSentence = 'Welcome to the Common Threads family! We are delighted that you have chosen to join our mission.'
 
             const recurringDonorIntroSentence = 'Thank you for continuing to be such a devoted supporter of Common Threads Project'
 
-            const inMemoryOfSentence = `Because you have chosen to donate in memory of ${honoreeName}, we will send an acknowledgement to ${honorInfo.recipient_email}. What a meaningful tribute.`
+            const inMemoryOfSentence = `Because you have chosen to donate in memory of ${honoreeName}, we will send an acknowledgement to ${honorInfo.honoreeEmail}. What a meaningful tribute.`
 
             const honorSentence = `Because you have chosen to honor with your contribution ${honoreeName}, we will send your message in an acknowledgement to them.  What a lovely tribute!`
 
@@ -145,21 +149,22 @@ export function assembleLanguage(donorInfo, honorInfo){
     // console.log(donorInfo);
     console.log(honorInfo);
 
-    console.log(standardDonorObj);
+    // console.log(standardDonorObj);
     
     // console.log(honorObj());
 
-    console.log(honoreeObj);
+    // console.log(honoreeObj);
 
     function determineRelevantTemplates(){
-        if(!honorObj()){
+        const honorerObj = honorObj()
+        if(!honorerObj){
             // just send a [standardDonorObj] 
             sendEmailToServer([standardDonorObj])
             console.log('sending standard email');
         } else {
             
             // send [honoreeObj, honorObj]
-            sendEmailToServer([honoreeObj, honorObj])
+            sendEmailToServer([honoreeObj, honorerObj])
             console.log('sending two emails');
         }   
     }

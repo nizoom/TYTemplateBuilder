@@ -1,7 +1,8 @@
 export async function sendEmailToServer(arrayOfEmailObj){
     console.log('sending');
-    //ASYNC FOR EACH 
-
+   
+    console.log(arrayOfEmailObj);
+    
     const response = await fetch("http://localhost:3002/send" , {
         method: "POST",
         headers: {

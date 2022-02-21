@@ -2,8 +2,10 @@ const express = require("express");
 const nodemailer = require("nodemailer");
 const app = express();
 const dotenv = require("dotenv")
-require('path')
+const path = require('path')
 const cors = require("cors");
+const fs = require('fs')
+const handlebars = require("handlebars");
 
 const port = 3002;
 
@@ -44,63 +46,66 @@ app.post('/send', function (req, res){
 
   console.log(req.body);
 
+  const arrOfEmailObjs = req.body;
 
-    // const readHTMLFile = function(path, callback){
-    //   fs.readFile(path, {encoding: 'utf-8'}, function(err, html) {
-    //     if(err){
-    //       console.log(err)
-    //       callback(err, null)
-    //       throw err;
-    //     }
-    //     else {
-    //       callback(null, html);
-    //     }
-    //   })
-    // }
+  arrOfEmailObjs.forEach(emailObj => {
 
-
-    // const __dirname = path.resolve();
-
-    // readHTMLFile(__dirname + `/emails/templates/${donation.templateName}.handlebars`, function(err, html){
-
-    //   const template = handlebars.compile(html);
-
-    //   //the properties of the obj are used to plug into the template 
-    //   const replacements = donation;
-
-    //   const htmlToSend = template(replacements);
+      const readHTMLFile = function(path, callback){
+      fs.readFile(path, {encoding: 'utf-8'}, function(err, html) {
+        if(err){
+          console.log(err)
+          callback(err, null)
+          throw err;
+        }
+        else {
+          callback(null, html);
+        }
+      })
+    }
 
 
+    const __dirname = path.resolve();
+
+    readHTMLFile(__dirname + `/templates/${emailObj.templateType}.handlebars`, function(err, html){
+
+      const template = handlebars.compile(html);
+
+      //the properties of the obj are used to plug into the template 
+      const replacements = emailObj;
+
+      const htmlToSend = template(replacements);
 
 
+    let mailOptions = {
 
-
-
-    // let mailOptions = {
-
-    //     from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
-    //     to: 'nissimram1812@gmail.com', //donation.TYToEmailAddress, //['info@commonthreadsproject.org', 
-    //     bcc : '',
-    //     subject: 'Test',
-    //     text: '',           
-    //     html: 'Hi from nodemailer API'//htmlToSend,
+        from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
+        to: 'nissimram1812@gmail.com', //donation.TYToEmailAddress, //['info@commonthreadsproject.org', 
+        bcc : '',
+        subject: 'Test',
+        text: '',           
+        html: htmlToSend,
     
-    //   };
+      };
     
       
     
-    //   transporter.sendMail(mailOptions, function(err, data) {
-    //     if (err) {
-    //       console.log("Error " + err);
-    
-    //       return `${donation} failed to send`
-    
-    //     } else {
-    //       console.log("Email sent successfully");
-    
-    //       return `${donation} was successfully sent`
-    //     }
-    //   });
-    // })
+      transporter.sendMail(mailOptions, function(err, data) {
+        if (err) {
+          console.log("Failed to send");
+          res.json({
+            status: `donation email ${arrOfEmailObjs.indexOf(emailObj)} failed to send`,
+          });
 
+    
+        } else {
+          console.log("Email sent successfully");
+          res.json({
+            status : `donation email ${arrOfEmailObjs.indexOf(emailObj)} sent successfully`
+          })
+          
+        }
+      });
+    })
+
+  })
 })
