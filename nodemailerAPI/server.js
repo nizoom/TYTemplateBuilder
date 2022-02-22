@@ -42,70 +42,78 @@ let transporter = nodemailer.createTransport({
 
 app.post('/send', function (req, res){
 
-    //{req.body.mailerState.email}
+  // let results = [] // success  /failure of whether emails are sent are stored here 
 
   console.log(req.body);
 
   const arrOfEmailObjs = req.body;
 
-  arrOfEmailObjs.forEach(emailObj => {
+  const numberOfEmails = arrOfEmailObjs.length;
 
-      const readHTMLFile = function(path, callback){
-      fs.readFile(path, {encoding: 'utf-8'}, function(err, html) {
-        if(err){
-          console.log(err)
-          callback(err, null)
-          throw err;
-        }
-        else {
-          callback(null, html);
-        }
-      })
-    }
+  getResults(arrOfEmailObjs)
+    // . then((data) => res.json({ results: [data]}));
 
-
-    const __dirname = path.resolve();
-
-    readHTMLFile(__dirname + `/templates/${emailObj.templateType}.handlebars`, function(err, html){
-
-      const template = handlebars.compile(html);
-
-      //the properties of the obj are used to plug into the template 
-      const replacements = emailObj;
-
-      const htmlToSend = template(replacements);
-
-
-    let mailOptions = {
-
-        from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
-        to: 'nissimram1812@gmail.com', //donation.TYToEmailAddress, //['info@commonthreadsproject.org', 
-        bcc : '',
-        subject: 'Test',
-        text: '',           
-        html: htmlToSend,
+  function getResults (arrOfEmailObjs){
     
-      };
-    
-      
-    
-      transporter.sendMail(mailOptions, function(err, data) {
-        if (err) {
-          console.log("Failed to send");
-          res.json({
-            status: `donation email ${arrOfEmailObjs.indexOf(emailObj)} failed to send`,
-          });
+         arrOfEmailObjs.map(emailObj => {
 
-    
-        } else {
-          console.log("Email sent successfully");
-          res.json({
-            status : `donation email ${arrOfEmailObjs.indexOf(emailObj)} sent successfully`
-          })
+        const readHTMLFile = function(path, callback){
+        fs.readFile(path, {encoding: 'utf-8'}, function(err, html) {
+          if(err){
+            console.log(err)
+            callback(err, null)
+            throw err;
+          }
+          else {
+            callback(null, html);
+          }
+        })
+      }
+
+
+      const __dirname = path.resolve();
+
+      readHTMLFile(__dirname + `/templates/${emailObj.templateType}.handlebars`, async function(err, html){
+
+        const template = handlebars.compile(html);
+
+        //the properties of the obj are used to plug into the template 
+        const replacements = emailObj;
+
+        const htmlToSend = template(replacements);
+
+
+        let mailOptions = {
+
+            from: 'cohen@commonthreadsproject.org', //ThankYouFromCTP@outlook.com' ALL TESTING USE THIS EMAIL 
+            to: 'nissimram1812@gmail.com', //donation.TYToEmailAddress, //['info@commonthreadsproject.org', 
+            bcc : '',
+            subject: 'Test',
+            text: '',           
+            html: htmlToSend,
+        
+          };
+        
+        const result = await transporter.sendMail(mailOptions)
+
+        const bool = result.accepted.length > 0 ? true : false 
+
+          console.log(bool);
           
-        }
-      });
-    })
+          resCallBack(bool)
+          return bool;
 
-  })
+      })
+    })
+  }
+
+  let results = []
+
+  function resCallBack(successbool){
+    results.push(successbool)
+    if(results.length === numberOfEmails){
+      res.json({results : results})
+    } 
+  }  
 })
+

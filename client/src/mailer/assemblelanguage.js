@@ -155,17 +155,23 @@ export function assembleLanguage(donorInfo, honorInfo){
 
     // console.log(honoreeObj);
 
-    function determineRelevantTemplates(){
+    async function determineRelevantTemplates(){
         const honorerObj = honorObj()
         if(!honorerObj){
             // just send a [standardDonorObj] 
-            sendEmailToServer([standardDonorObj])
+            const nodeMailerResult = await sendEmailToServer([standardDonorObj])
             console.log('sending standard email');
+
+            return nodeMailerResult
+            
         } else {
             
             // send [honoreeObj, honorObj]
-            sendEmailToServer([honoreeObj, honorerObj])
             console.log('sending two emails');
+            const nodeMailerResult = await sendEmailToServer([honoreeObj, honorerObj])
+
+            return nodeMailerResult
+            
         }   
     }
 
