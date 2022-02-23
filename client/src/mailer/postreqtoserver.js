@@ -32,9 +32,11 @@ export async function sendEmailToServer(arrayOfEmailObj){
                 messageStatus = false 
             }
         })
-
+        console.log(messageStatus);
         return messageStatus
         
     }
+
+    return response;
 }
 

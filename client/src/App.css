@@ -2,6 +2,8 @@
 body{
   background-color: #B6ACAC;
   font-family: 'Roboto', sans-serif;
+  zoom: 125%;
+
 }
 
 .step{
@@ -141,3 +143,6 @@ input::-webkit-inner-spin-button {
   color:#71A9B2 ;
 }
 
+.opaqueduringpopup{
+  opacity: .4;
+}

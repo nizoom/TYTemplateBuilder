@@ -175,7 +175,7 @@ export function assembleLanguage(donorInfo, honorInfo){
         }   
     }
 
-    determineRelevantTemplates()
+    return determineRelevantTemplates()
 
 }
 

@@ -8,6 +8,7 @@ import EmailField from '../inputfields/emailfield';
 import { honorFormValidation } from '../../validation';
 import { assembleLanguage } from '../../mailer/assemblelanguage';
 import HonorerMsg from './honorermsg';
+import MsgStatusPopup from '../statuspopup/statuspopup';
 
 const HonorForm = (props) => {
 
@@ -61,8 +62,7 @@ const HonorForm = (props) => {
    const [incompleteFields, setIncompleteFields] = useState(false)
 
 
-
-   function handleSubmit(e){
+   async function handleSubmit(e){
      e.preventDefault();
 
      if(honoringUserChoices.honorForm !== 'No'){ // there is an honor form
@@ -72,11 +72,14 @@ const HonorForm = (props) => {
 
           const combinedHonoringInfo = {...honoringUserChoices, ...props.honoreeVizStrs}
 
-          assembleLanguage(props.userChoices, combinedHonoringInfo)
+          const emailResult = await assembleLanguage(props.userChoices, combinedHonoringInfo) //this function eventually calls another function which sends the email
+          props.getMsgStatustToRoot(emailResult)
+
        }
      } else {
-      console.log('submitting');
-      assembleLanguage(props.userChoices, honoringUserChoices)
+        console.log('submitting');
+        const emailResult = await assembleLanguage(props.userChoices, honoringUserChoices)
+        props.getMsgStatustToRoot(emailResult)
      }
      
    }
@@ -94,7 +97,6 @@ const HonorForm = (props) => {
      const validityObj = incompleteFields[index];
 
      const validity = Object.values(validityObj)[0]
-
 
      return validity
 
@@ -164,6 +166,10 @@ const HonorForm = (props) => {
                     <button type = 'submit' className = 'next-stp-btn submit-btn' onClick = {handleSubmit}> Submit </button>
                 </div>
             }
+
+          
+
+            
         </div>
     )
 }

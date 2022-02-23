@@ -130,3 +130,29 @@
     opacity: 0;
     transition: visibility 0s 10s, opacity 10s linear;
 }
+
+.popup-wrapper{
+    background-color: #04010F ;
+    z-index: 2000;
+    position:absolute;
+    width:400px;
+    height:100px;
+    left:40%;
+    top:40%;
+    margin:auto;
+    color: #B6ACAC;
+    text-align: center;
+
+
+}
+
+.popup-wrapper button{
+    font-family:'Roboto', sans-serif;
+    background-color: #71A9B2;
+    border: 2px solid #C7CDE0;
+    color: white;
+    width: 50px;
+    box-shadow:  5px 5px 5px #04010F ;
+    border-radius: 2px;
+}
+

@@ -3,8 +3,9 @@ import Dropdown from './components/dropdowns/dropdowns';
 import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
 import NextStepBtn from './components/nextstepbtn/nextstepbtn'
+import MsgStatusPopup from './components/statuspopup/statuspopup';
 
-import React, {useState, useEffect, useRef} from 'react'
+import React, {useState} from 'react'
 
 function App() {
 
@@ -109,14 +110,28 @@ function App() {
     setHonoreeVizStrs(obj)
   }
 
+  const [resultMessage, setResultMessage] = useState(true)
+
+  function getMsgStatustToRoot(bool){
+    bool ? setResultMessage(true) : setResultMessage(false)
+  }
+
+  function closePopUp(){
+    setResultMessage(null)
+  }
+
 
   return (
 
     <div className="App">
+      { resultMessage !== null ? <MsgStatusPopup status = {resultMessage} closePopUp = {closePopUp}/> : null }
+
       <header className="App-header">
         <h1 className = 'app-title'> Custom Email Template Builder </h1>
         <h2 className = 'sub-title'> Custom thank you emails made easy </h2>
       </header>
+
+      <div className={resultMessage !== null?  'opaqueduringpopup' : ''}> 
 
       <h3 className='step'> {stepStr} </h3>
 
@@ -137,7 +152,9 @@ function App() {
                   updatePageChangeState = {updatePageChangeState}
                   /> </div>
 
-                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices} getHonorState = {getHonorState} honoreeVizStrs = {honoreeVizStrs}/> 
+                  : <PresentForm templateType = 'Honoring' updateStep = {updateStep} userChoices = {userChoices} getHonorState = {getHonorState} honoreeVizStrs = {honoreeVizStrs}
+                    getMsgStatustToRoot={getMsgStatustToRoot}
+                  /> 
 
                   }
 
@@ -152,6 +169,8 @@ function App() {
 
         <Visualizer userChoices = {userChoices} formPage = {formPage} honorState = {honorState} updateUserChoice = {updateUserChoice} getHonoreeVizStrs ={getHonoreeVizStrs}/>
 
+
+      </div>
 
       </div>
   
