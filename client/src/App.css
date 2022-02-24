@@ -6,10 +6,6 @@ body{
 
 }
 
-.step{
-  /* grid-column: span 1;
-  grid-row: row 1; */
-}
 
 .form-visualizer-grid{
   display: grid;

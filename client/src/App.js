@@ -4,12 +4,14 @@ import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
 import NextStepBtn from './components/nextstepbtn/nextstepbtn'
 import MsgStatusPopup from './components/statuspopup/statuspopup';
+import LoginPage from './login/login';
+
 
 import React, {useState} from 'react'
 
 function App() {
 
-
+  // console.log(process.env.REACT_APP_PW)
   // track all user inputs on the form
 
   const [userChoices, setUserChoices] = useState({
@@ -120,10 +122,12 @@ function App() {
     setResultMessage(null)
   }
 
+  const authorized = false; // call function to assess authorization 
 
   return (
 
-    <div className="App">
+    <div className="App">{
+      authorized ? <div> 
       { resultMessage !== null ? <MsgStatusPopup status = {resultMessage} closePopUp = {closePopUp}/> : null }
 
       <header className="App-header">
@@ -171,8 +175,10 @@ function App() {
 
 
       </div>
-
       </div>
+      </div> : 
+        <LoginPage/>
+      }
   
     </div>
   );
