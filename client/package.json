@@ -9,6 +9,7 @@
     "dotenv": "^16.0.0",
     "moment": "^2.29.1",
     "react": "^17.0.2",
+    "react-client-session": "0.0.7",
     "react-currency-input-field": "^3.6.3",
     "react-dom": "^17.0.2",
     "react-scripts": "5.0.0",

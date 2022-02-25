@@ -4,14 +4,14 @@ import Visualizer from './emailvisualizer/visualizer';
 import PresentForm from './formfromtemplate/presentform';
 import NextStepBtn from './components/nextstepbtn/nextstepbtn'
 import MsgStatusPopup from './components/statuspopup/statuspopup';
-import LoginPage from './login/login';
+import LoginPage from './login/logincomponent';
 
 
-import React, {useState} from 'react'
+import React, {useState, useEffect} from 'react'
+
 
 function App() {
 
-  // console.log(process.env.REACT_APP_PW)
   // track all user inputs on the form
 
   const [userChoices, setUserChoices] = useState({
@@ -27,21 +27,15 @@ function App() {
 
 
   function updateUserChoice(choice){
-    // console.log(choice)
-    
-    // console.log(Object.keys(choice))
+
     const [keyName] = Object.keys(choice);
     const [valueName] = Object.values(choice)
-    // console.log(keyName)
-    // console.log(valueName);
+
       setUserChoices({
         ...userChoices,
         [keyName] : valueName
       })
-    // }
 
-
-    // console.log(userChoices)
   } 
 
 
@@ -78,6 +72,7 @@ function App() {
 
   const [formPage, setFormPage] = useState(1)
 
+
   function goTotNextPreviousForm (direction){
 
     // direction is + 1 or - 1
@@ -90,13 +85,8 @@ function App() {
       setRecentPageChange(true)
     }
 
-    //setFormPage as such 
-
   }
 
-  // useEffect(() => {
-  //   console.log(userChoices)
-  // }, [userChoices])
 
   const [honorState, setHonorState] = useState('')
   
@@ -112,7 +102,7 @@ function App() {
     setHonoreeVizStrs(obj)
   }
 
-  const [resultMessage, setResultMessage] = useState(true)
+  const [resultMessage, setResultMessage] = useState(null)
 
   function getMsgStatustToRoot(bool){
     bool ? setResultMessage(true) : setResultMessage(false)
@@ -122,12 +112,35 @@ function App() {
     setResultMessage(null)
   }
 
-  const authorized = false; // call function to assess authorization 
+
+  function getSessionStorageOrDefault(key, defaultValue) {
+    const stored = sessionStorage.getItem(key);
+    if (!stored) {
+      return defaultValue;
+    }
+    return JSON.parse(stored);
+  }
+
+
+  const [validLogin, setValidLogin] = useState(
+    getSessionStorageOrDefault('status', false)
+  )
+
+  function updateSessionStorage(loginObj){
+    console.log ('fired ')
+    sessionStorage.setItem('status', JSON.stringify(loginObj))      
+    setValidLogin(true)
+  }
+
+  useEffect(() => {
+    sessionStorage.setItem('status', JSON.stringify(validLogin));
+  }, [validLogin]);
+
 
   return (
 
     <div className="App">{
-      authorized ? <div> 
+      validLogin ? <div> 
       { resultMessage !== null ? <MsgStatusPopup status = {resultMessage} closePopUp = {closePopUp}/> : null }
 
       <header className="App-header">
@@ -177,7 +190,7 @@ function App() {
       </div>
       </div>
       </div> : 
-        <LoginPage/>
+        <LoginPage updateSessionStorage = {updateSessionStorage}/>
       }
   
     </div>

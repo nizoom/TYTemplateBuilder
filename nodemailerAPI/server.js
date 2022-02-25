@@ -6,8 +6,11 @@ const path = require('path')
 const cors = require("cors");
 const fs = require('fs')
 const handlebars = require("handlebars");
+const login = require( "./resplogin.js")
 
 const port = 3002;
+
+
 
 app.use(express.json());
 app.use(cors());
@@ -15,6 +18,7 @@ app.use(cors());
 app.listen(port, () => {
  console.log(`Server is running on port: ${port}`);
 });
+
 
 dotenv.config({path: '../.env'})
 
@@ -39,6 +43,8 @@ let transporter = nodemailer.createTransport({
    });
 
 
+
+// login();
 
 app.post('/send', function (req, res){
 
@@ -117,3 +123,9 @@ app.post('/send', function (req, res){
   }  
 })
 
+
+app.post('/login', async function (req, res){
+
+    result = await login(req.body)
+    res.json(result)
+})
