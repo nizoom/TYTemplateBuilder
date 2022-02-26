@@ -3,8 +3,6 @@ import './login.css'
 import loginbox from './loginbox.jpg'
 import { attemptLogin } from './reqlogin';
 
-import ReactSession from 'react-client-session';
-
 const LoginPage = (props) => {
 
     // ReactSession.setStoreType("sessionStorage");
@@ -35,7 +33,7 @@ const LoginPage = (props) => {
     } 
 
     return (
-        <div className=''>
+        <div className='parent-wrapper'>
 
             <img src = {loginbox} alt = 'login page' width = '600px' className='login-box'/>
 

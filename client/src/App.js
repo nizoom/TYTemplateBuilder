@@ -124,6 +124,7 @@ function App() {
 
   const [validLogin, setValidLogin] = useState(
     getSessionStorageOrDefault('status', false)
+
   )
 
   function updateSessionStorage(loginObj){
@@ -143,6 +144,7 @@ function App() {
       validLogin ? <div> 
       { resultMessage !== null ? <MsgStatusPopup status = {resultMessage} closePopUp = {closePopUp}/> : null }
 
+      <div className='main-app-margins'> 
       <header className="App-header">
         <h1 className = 'app-title'> Custom Email Template Builder </h1>
         <h2 className = 'sub-title'> Custom thank you emails made easy </h2>
@@ -189,6 +191,7 @@ function App() {
 
       </div>
       </div>
+      </div> 
       </div> : 
         <LoginPage updateSessionStorage = {updateSessionStorage}/>
       }

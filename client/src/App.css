@@ -13,9 +13,10 @@ body{
   grid-template-columns: 50% 50%;
   /* grid-template-rows: 0; */
   position: absolute;
+  
 }
 
-.App{
+.main-app-margins{
   margin: 15px 0 25px 25px;
 }
 
