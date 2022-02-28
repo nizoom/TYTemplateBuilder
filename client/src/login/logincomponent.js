@@ -35,6 +35,8 @@ const LoginPage = (props) => {
     return (
         <div className='parent-wrapper'>
 
+            <div className='img-buffer'></div>
+
             <img src = {loginbox} alt = 'login page' width = '600px' className='login-box'/>
 
             <div className='inner-login-div'> 
@@ -44,6 +46,8 @@ const LoginPage = (props) => {
 
                 <button type = 'submit' onClick = {handleLoginSubmit}> SUBMIT </button>
             </div>
+
+            <div className='img-buffer'></div>
            
         </div>
     )

@@ -11,24 +11,27 @@
 
     bottom: 200px; */
     position: absolute; 
-    top: calc(50% - 175px); 
+    top: calc(50% - 150px); 
     left: calc(50% - 150px);
     text-align: center; 
     width: 300px; 
     display: flex;
     flex-direction: column;
     height: 300px;
+    align-items: center;
     
 }
 
 .parent-wrapper{
     left: 50%;
     transform: translateX(-50%);
- 
-
     position: relative;
-    height: 451px;
-    width: 600px;
+    /* height: 451px; */
+    width: 600px; 
+}
+
+.img-buffer{
+    margin: 25%;
 }
 
 .login-box{

@@ -19,6 +19,9 @@ body{
 .main-app-margins{
   margin: 15px 0 25px 25px;
 }
+.App{
+  height: 100%;
+}
 
 .app-title{
 
@@ -143,3 +146,4 @@ input::-webkit-inner-spin-button {
 .opaqueduringpopup{
   opacity: .4;
 }
+
