@@ -2,7 +2,7 @@ export async function attemptLogin(pwAttempt){
 
     console.log(pwAttempt);
 
-    const response = await fetch('http://localhost:3002/login' , {
+    const response = await fetch('https://pure-mesa-05243.herokuapp.com/login' , { // CHANGE TO NEW ENDPOINT 
         method: "POST",
         headers: {
         "Content-type": "application/json",
