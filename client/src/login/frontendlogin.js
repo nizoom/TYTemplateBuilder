@@ -2,7 +2,7 @@ export async function attemptLogin(pwAttempt){
 
     console.log(pwAttempt);
 
-    const response = await fetch('https://pure-mesa-05243.herokuapp.com/login' , { // CHANGE TO NEW ENDPOINT 
+    const response = await fetch('/.netlify/functions/requestlogin' , { // CHANGE TO NEW ENDPOINT 
         method: "POST",
         headers: {
         "Content-type": "application/json",
@@ -11,12 +11,18 @@ export async function attemptLogin(pwAttempt){
     
     }).then((res) => res.json())
         .then(async (res) => {
-          
             return res
             
         })
-
-    return response
+    
+    if(response.message === "Login Success"){
+        return {loggedIn : false}
+    } else {
+        return {loggedIn : true}
+    }
+  
         
 }
 
+
+// 'https://pure-mesa-05243.herokuapp.com/login'

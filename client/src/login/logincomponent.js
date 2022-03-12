@@ -1,7 +1,7 @@
 import React, {useState} from 'react';
 import './login.css'
 import loginbox from './loginbox.jpg'
-import { attemptLogin } from './reqlogin';
+import { attemptLogin } from './frontendlogin';
 
 const LoginPage = (props) => {
 
@@ -15,10 +15,10 @@ const LoginPage = (props) => {
 
     async function handleLoginSubmit(e){
         e.preventDefault();
-        const loginObj = await attemptLogin(pwText)
-        console.log(loginObj.result)
-        if(loginObj.result){
-            props.updateSessionStorage(loginObj)
+        const loginResult = await attemptLogin(pwText)
+        console.log(loginResult)
+        if(loginResult.loggedIn){
+            props.updateSessionStorage(loginResult)
         } else {
             setErr(true)
         }
