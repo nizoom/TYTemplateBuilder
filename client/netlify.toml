@@ -1,6 +1,6 @@
 [build]
 
-    command = 'npm run build'
+    command = 'CI run build'
 
     functions = 'functions'
 
