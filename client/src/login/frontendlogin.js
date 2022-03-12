@@ -16,9 +16,9 @@ export async function attemptLogin(pwAttempt){
         })
     
     if(response.message === "Login Success"){
-        return {loggedIn : false}
-    } else {
         return {loggedIn : true}
+    } else {
+        return {loggedIn : false}
     }
   
         
