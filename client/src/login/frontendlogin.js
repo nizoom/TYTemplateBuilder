@@ -11,9 +11,12 @@ export async function attemptLogin(pwAttempt){
     
     }).then((res) => res.json())
         .then(async (res) => {
+            console.log(res);
             return res
             
         })
+
+        console.log(response);
     
     if(response.message === "Login Success"){
         return {loggedIn : true}
