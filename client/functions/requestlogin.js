@@ -4,8 +4,6 @@ const axios = require('axios')
 
 const url = 'https://pure-mesa-05243.herokuapp.com/login'
 
-const testUrl = 'https://gorest.co.in/public/v2/users'
-
 exports.handler = async function (event, context) {
 
 

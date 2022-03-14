@@ -1,4 +1,4 @@
-import { sendEmailToServer } from "./postreqtoserver"
+import { sendEmailToServer } from "./initemailreq"
 export function assembleLanguage(donorInfo, honorInfo){
     console.log(honorInfo.inHonorOrMemoryStr);
 
