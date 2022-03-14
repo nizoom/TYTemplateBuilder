@@ -3,7 +3,7 @@ export async function sendEmailToServer(arrayOfEmailObj){
    
     // console.log(arrayOfEmailObj);
 
-    const response = await fetch("/.netlify/functions/requestlogin" , {
+    const response = await fetch("/.netlify/functions/requestemailsend" , {
         method: "POST",
         headers: {
         "Content-type": "application/json",
