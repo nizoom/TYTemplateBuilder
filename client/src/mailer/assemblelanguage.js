@@ -1,6 +1,6 @@
 import { sendEmailToServer } from "./initemailreq"
 export function assembleLanguage(donorInfo, honorInfo){
-    console.log(honorInfo.inHonorOrMemoryStr);
+    // console.log(honorInfo.inHonorOrMemoryStr);
 
     const taxParagraph =  donorInfo.taxParagraph === 'Yes' ? `Please let this note serve as your receipt for a fully tax-deductible contribution of  ${donorInfo.donationAmount} 
     to Common Threads Project on ${donorInfo.donationDate}   No goods or services were provided in exchange for this contribution. Common Threads Project is an 

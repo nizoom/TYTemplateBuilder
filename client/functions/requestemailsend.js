@@ -4,6 +4,8 @@ const url = 'https://pure-mesa-05243.herokuapp.com/submitemail';
 
 exports.handler = async function (event, context) {
 
+    console.log('fired');
+
     const emailObj = JSON.parse(event.body)
 
     console.log(emailObj);

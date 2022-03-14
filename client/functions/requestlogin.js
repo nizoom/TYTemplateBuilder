@@ -1,6 +1,4 @@
-const axios = require('axios')
-
-// const moment = require('moment')
+const axios = require ('axios');
 
 const url = 'https://pure-mesa-05243.herokuapp.com/login'
 
