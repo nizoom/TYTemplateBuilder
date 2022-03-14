@@ -98,7 +98,7 @@ function App() {
 
   const [honoreeVizStrs, setHonoreeVizStrs] = useState()
   function getHonoreeVizStrs(obj){ // this function gets the strings needed for the honoree email from the visualizer to pass eventually to assembleLanguage file
-  
+    console.log(obj);
     setHonoreeVizStrs(obj)
   }
 

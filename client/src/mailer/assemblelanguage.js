@@ -68,9 +68,9 @@ export function assembleLanguage(donorInfo, honorInfo){
         
                 introSentence : introSentence,
         
-                email : donorInfo.recipientEmail,
+                TYToEmailAddres : donorInfo.recipientEmail,
 
-                subject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
+                emailSubject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
                 templateType : 'honorer'
 
@@ -123,21 +123,21 @@ export function assembleLanguage(donorInfo, honorInfo){
         return finalStr
     }
 
-    const honoreeObj = {
+    const honoreeObj = { //its going to look confusing but Im going to keep these where possible and add them into the node mailer templates on the server side 
 
         honorStatus : honorInfo.honorForm, 
         
-        dearHonoreeStr : honorInfo.dearHonoreeStr,
+        dearHonoreeStr : honorInfo.dearHonoreeStr, // should be changed to recipient name 
 
-        thoseGivingStr : honorInfo.thoseGivingStr,
+        thoseGivingStr : honorInfo.thoseGivingStr, 
 
         inHonorOrInMemoryStr : honorInfo.inHonorOrMemoryStr,
 
         gratefulTheyChoseToStr : honorInfo.thesePeopleDonatedStr,
 
-        customMsg : honorInfo.customMsg,
+        messageFromHonorer : honorInfo.customMsg,
 
-        email : honorInfo.honoreeEmail,
+        TYToEmailAddres : honorInfo.honoreeEmail,
 
         templateType : 'honoree',
 
