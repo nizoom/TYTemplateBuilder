@@ -21,7 +21,7 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         subject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
-        templateType : donorInfo.templateType === 'New donor' ? 'newdonor' : 'recurringdonor'
+        templateName : donorInfo.templateType === 'New donor' ? 'newdonor' : 'recurringdonor'
 
     }
 
@@ -72,8 +72,8 @@ export function assembleLanguage(donorInfo, honorInfo){
 
                 emailSubject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
-                templateType : 'honorer'
-                
+                templateName : 'honorer'
+
             }
     
             return honorerObj
@@ -138,7 +138,7 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         TYToEmailAddres : honorInfo.honoreeEmail,
 
-        templateType : 'honoree',
+        templateName : 'honoree',
 
         emailSubject : `${getEmailSubjectStr(donorInfo)} has dedicated a donation to you`
     }
