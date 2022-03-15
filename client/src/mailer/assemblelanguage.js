@@ -17,7 +17,7 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         taxParagraph : taxParagraph,
 
-        email : donorInfo.recipient_email,
+        TYToEmailAddress : donorInfo.recipient_email,
 
         emailSubject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
