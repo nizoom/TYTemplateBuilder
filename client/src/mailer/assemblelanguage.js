@@ -19,7 +19,7 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         email : donorInfo.recipient_email,
 
-        subject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
+        emailSubject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
         templateName : donorInfo.templateType === 'New donor' ? 'newdonor' : 'recurringdonor'
 
