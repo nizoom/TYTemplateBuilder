@@ -73,7 +73,6 @@ export function assembleLanguage(donorInfo, honorInfo){
                 emailSubject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
                 templateType : 'honorer'
-
                 
             }
     

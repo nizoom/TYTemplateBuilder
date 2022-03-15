@@ -80,7 +80,7 @@ const HonorEmailPreview = (props) => {
                 if(strState === 'In honor of'){
            
                     if (honoree === recipient ){ // most likely scenario
-                       return 'honor you in this way'
+                       return 'in your honor'
                     } else {
                         return `honor of ${honoree}.`
                     }
