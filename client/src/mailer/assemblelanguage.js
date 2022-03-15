@@ -68,7 +68,7 @@ export function assembleLanguage(donorInfo, honorInfo){
         
                 introSentence : introSentence,
         
-                TYToEmailAddres : donorInfo.recipientEmail,
+                TYToEmailAddress : donorInfo.recipientEmail,
 
                 emailSubject: `Thank you ${donorInfo.donorStr} for your donation to Common Threads Project`,
 
@@ -136,7 +136,7 @@ export function assembleLanguage(donorInfo, honorInfo){
 
         messageFromHonorer : honorInfo.customMsg,
 
-        TYToEmailAddres : honorInfo.honoreeEmail,
+        TYToEmailAddress : honorInfo.honoreeEmail,
 
         templateName : 'honoree',
 
