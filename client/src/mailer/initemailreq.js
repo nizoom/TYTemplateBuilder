@@ -11,31 +11,19 @@ export async function sendEmailToServer(arrayOfEmailObj){
         body: JSON.stringify(arrayOfEmailObj), // ONE EMAIL ELEMENT IN ARRAY 
     }) 
     .then((res) => res.json())
-    .then(async (res) => {
-        const resData = await res;
-        const messageStatus = declareSendingResults(resData)
-        return messageStatus;
-      })
-    
-    // console.log(response);
-
-    function declareSendingResults(resultsObj){
-        console.log(resultsObj);
-
-        const arrOfResults = resultsObj.results
-
-        let messageStatus = true
-
-        arrOfResults.forEach(result => {
-            if(!result){
-                messageStatus = false 
-            }
+       .then(async (res) => {
+            console.log(res);
+            return res
+            
         })
-        console.log(messageStatus);
-        return messageStatus
         
+    console.log(response);
+
+    if(response.results){
+        return true
+    } else {
+        return false
     }
 
-    return response;
 }
 

@@ -43,6 +43,10 @@ exports.handler = async function (event, context) {
 
     } catch (error) {
         console.log(error);
+        return {
+            statusCode : 502,
+            body: JSON.stringify({message : 'Email failed'})
+        }
     }
 
 }
