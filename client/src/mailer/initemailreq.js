@@ -16,10 +16,10 @@ export async function sendEmailToServer(arrayOfEmailObj){
             return res
             
         })
-        
+
     console.log(response);
 
-    if(response.results){
+    if(response.message === 'Sent successfully'){
         return true
     } else {
         return false
