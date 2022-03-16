@@ -1,6 +1,4 @@
 import React from 'react';
-import Popup from 'reactjs-popup';
-
 
 const MsgStatusPopup = (props) => {
    
@@ -15,6 +13,7 @@ const MsgStatusPopup = (props) => {
     return (
         <div className='popup-wrapper'>
           <p>{message} </p>
+          <p>Note any bounced emails are directed to RC's CTP Email</p> 
           <button onClick={handlePopUpClick}> OK </button>
   
         </div>

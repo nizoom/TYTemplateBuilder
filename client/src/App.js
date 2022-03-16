@@ -123,7 +123,6 @@ function App() {
 
   const [validLogin, setValidLogin] = useState(
     getSessionStorageOrDefault('status', false)
-
   )
 
   function updateSessionStorage(loginObj){

@@ -135,14 +135,17 @@
     background-color: #04010F ;
     z-index: 2000;
     position:absolute;
-    width:400px;
-    height:100px;
+    width:500px;
+    height: 200px;
     left:35%;
     top:40%;
     margin:auto;
     color: #B6ACAC;
     text-align: center;
-
+    display: flex;
+    flex-direction: column;
+   justify-content: space-evenly;
+   align-items: center;
 
 }
 
@@ -154,5 +157,9 @@
     width: 50px;
     box-shadow:  5px 5px 5px #04010F ;
     border-radius: 2px;
+}
+
+.popup-wrapper p {
+    margin: 0;
 }
 

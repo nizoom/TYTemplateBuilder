@@ -22,6 +22,8 @@ exports.handler = async function (event, context) {
             }
         })
 
+        console.log(responseObj);
+
         const resultBoolean = responseObj.data.result // true ? then pw was correct / else incorrect
 
         if(resultBoolean){
