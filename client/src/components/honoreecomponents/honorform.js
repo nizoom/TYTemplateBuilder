@@ -8,7 +8,6 @@ import EmailField from '../inputfields/emailfield';
 import { honorFormValidation } from '../../validation';
 import { assembleLanguage } from '../../mailer/assemblelanguage';
 import HonorerMsg from './honorermsg';
-import MsgStatusPopup from '../statuspopup/statuspopup';
 
 const HonorForm = (props) => {
 
@@ -24,6 +23,7 @@ const HonorForm = (props) => {
             customMsg: '',
             dearHonoreeStr : ''
     })
+
 
     function updateHonorUserChoice(choice){
 
@@ -61,6 +61,7 @@ const HonorForm = (props) => {
 
    const [incompleteFields, setIncompleteFields] = useState(false)
 
+   const [submitBtnMessage, setSubmitBtnMessage] = useState('Submit');
 
    async function handleSubmit(e){
      e.preventDefault();
@@ -69,11 +70,12 @@ const HonorForm = (props) => {
        const fieldValidity = honorFormValidation(honoringUserChoices)
        setIncompleteFields(fieldValidity)
        if(fieldValidity === 'submit'){
-
+          setSubmitBtnMessage('Sending, please wait')
           const combinedHonoringInfo = {...honoringUserChoices, ...props.honoreeVizStrs}
 
           const emailResult = await assembleLanguage(props.userChoices, combinedHonoringInfo) //this function eventually calls another function which sends the email
           props.getMsgStatustToRoot(emailResult)
+          setSubmitBtnMessage('Submit')
 
        }
      } else {
@@ -163,7 +165,7 @@ const HonorForm = (props) => {
            
               <div className='submit-stp-wrapper'>
 
-                    <button type = 'submit' className = 'next-stp-btn submit-btn' onClick = {handleSubmit}> Submit </button>
+                    <button type = 'submit' className = 'next-stp-btn submit-btn' onClick = {handleSubmit}> {submitBtnMessage} </button>
                 </div>
             }
 

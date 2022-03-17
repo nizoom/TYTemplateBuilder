@@ -101,7 +101,7 @@ function App() {
     setHonoreeVizStrs(obj)
   }
 
-  const [resultMessage, setResultMessage] = useState(null)
+  const [resultMessage, setResultMessage] = useState(true)
 
   function getMsgStatustToRoot(bool){
     bool ? setResultMessage(true) : setResultMessage(false)
@@ -122,7 +122,8 @@ function App() {
 
 
   const [validLogin, setValidLogin] = useState(
-    getSessionStorageOrDefault('status', false)
+    // getSessionStorageOrDefault('status', false)
+    true
   )
 
   function updateSessionStorage(loginObj){
