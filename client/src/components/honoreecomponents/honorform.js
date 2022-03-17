@@ -80,8 +80,10 @@ const HonorForm = (props) => {
        }
      } else {
         console.log('submitting');
+        setSubmitBtnMessage('Sending, please wait')
         const emailResult = await assembleLanguage(props.userChoices, honoringUserChoices)
         props.getMsgStatustToRoot(emailResult)
+        setSubmitBtnMessage('Submit')
      }
      
    }
