@@ -48,12 +48,16 @@ const StandardInputField = (props) => {
   //   console.log(value)
   // }, [value])
     // console.log(props.incompleteFields);
+    
 
     return(
         <div className='input-field-position'> 
    
             <input className={props.incompleteFields ===  'invalid' ? 'incomplete': props.cssClass} placeholder= {props.incompleteFields ===  'invalid' ? `${props.prefill} required` : props.prefill}
-            onChange={handleChange} value = {props.value !== undefined ? props.value : ''} type = {props.type} />
+            onChange={handleChange} value = {props.value !== undefined ? props.value : ''} type = {props.type} min={"2005-01-01" }max={"9999-12-31"}
+          
+
+        />
 
           
         </div>

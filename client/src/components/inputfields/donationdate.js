@@ -12,7 +12,10 @@ const DonationDate = (props) => {
 
             <StandardInputField type = 'date' cssClass = 'short-input-field' updateUserChoice = {props.updateUserChoice} 
 
-                updateKey = 'donationDate' incompleteFields = {props.fieldValidity} value = {props.userChoices.donationDate ==='mm-dd-yyyy' ? '' : props.userChoices.donationDate}/>
+                updateKey = 'donationDate' incompleteFields = {props.fieldValidity} value = {props.userChoices.donationDate ==='mm-dd-yyyy' ? '' : props.userChoices.donationDate} 
+                
+           
+                />
 
         </div>
     )
