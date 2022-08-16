@@ -14,7 +14,7 @@ The forms are designed to capture information from offline donations. That means
 
 The visualizer on the right side shows the changes to template as the employee fills out the form. Thereby, they have a better sense of what will ultimately be sent out. The pieces of text highlighted in yellow indicate dynamic content that can be changed through the input fields. Any new text will be added automatically and be grammatically correct which is important when listing multiple donors. 
 
-The frontend is hosted on Netlify. The backend is built out of the NodeJS project mentioned above.
+The frontend is hosted on Netlify. The backend is built out of the NodeJS project mentioned above which is hosted on Heroku.
 
 ## Installation
 
