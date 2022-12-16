@@ -124,7 +124,7 @@ function App() {
 
   return (
     <div className="App">
-      {!validLogin ? (
+      {validLogin ? (
         <div>
           {resultMessage !== null ? (
             <MsgStatusPopup status={resultMessage} closePopUp={closePopUp} />
