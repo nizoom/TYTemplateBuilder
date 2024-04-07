@@ -9,7 +9,7 @@ async function login(reqBody) {
   console.log(correctPW);
 
   console.log(reqBody);
-  if (correctPW === attemptedPW) {
+  if (correctPW === attemptedPW.trim()) {
     console.log("success");
     const uuid = uuidv4();
     return {
